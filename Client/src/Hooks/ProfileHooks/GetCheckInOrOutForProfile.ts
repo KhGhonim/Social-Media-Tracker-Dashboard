@@ -1,8 +1,8 @@
-import { GetCheckInOrOutForProfileAPI, ServerUrl } from "../../Logs/envLog";
 import { useState, useEffect } from "react";
 import {  useAppSelector } from "../ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";
 import toast from "react-hot-toast";
+import { GetCheckInOrOutForProfileAPI, ServerUrl } from "../../Keys/envKeys";
 
 
 const GetCheckInOrOutForProfile = () => {
