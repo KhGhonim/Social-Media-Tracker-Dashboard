@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sideBar-text-color: #f7fafcef;
+  --sideBar-text-color-hover: #fafafa;
+  --sideBar-bg-color: #7a40f2;
+  --animation-bg-color: #ecaca1;
+  --bg-color: #f9f9f9;
+  --rightSide-bg-color: #f5f5f5;
+  --text-color: #0D0D0D;
+  --navbar: #7a40f2; 
+  --navbar-hover: #7b40f2ee;
+  --floatingStats: #ffffff;
+  --allwhite: #ffffff;
+  --allblack: #000000;
+
+}
+
+.dark {
+  --sideBar-text-color: #1aff79be;
+  --sideBar-text-color-hover: #1aff7988;
+  --sideBar-bg-color: #0D0D0D;
+  --animation-bg-color: #;
+  --bg-color: #1d1c1c;
+  --rightSide-bg-color: #141313;
+  --text-color: #f5f5f5;
+  --navbar: #1aff79be; 
+  --navbar-hover: #1aff7994;
+  --floatingStats: #0D0D0D;
+  --allwhite: #ffffff;
+  --allblack: #000000;
+
+
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.cairo-ALAPHA {
+  font-family: "Cairo", serif;
+  font-optical-sizing: auto;
+  font-weight: 200, 300, 400, 500, 600, 700, 800, 900;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: #FFF #FFF transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid;
+  border-color: transparent transparent #FF3D00 #FF3D00;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: rotationBack 0.5s linear infinite;
+  transform-origin: center center;
+}
+.loader::before {
+  width: 32px;
+  height: 32px;
+  border-color: #FFF #FFF transparent transparent;
+  animation: rotation 1.5s linear infinite;
+}
+    
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+    
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}

@@ -1,0 +1,27 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "ALPHA-DB",
+      "username": "postgres",
+      "database": "ALPHA-DB"
+    },
+    {
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": true
+        }
+      },
+      "previewLimit": 50,
+      "server": "dpg-ct4nl2tumphs73e6vg30-a.oregon-postgres.render.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Social Media Tracker",
+      "username": "socialmediaanalytics",
+      "database": "socialmediaanalyticstracker"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/profile", "destination": "/index.html" },
+    { "source": "/profile/edit", "destination": "/index.html" },
+    { "source": "/social-media", "destination": "/index.html" },
+    { "source": "/add-new-account", "destination": "/index.html" },
+    { "source": "/add-new-user", "destination": "/index.html" },
+    { "source": "/growth", "destination": "/index.html" },
+    { "source": "/login", "destination": "/index.html" },
+    { "source": "/operation-management", "destination": "/index.html" },
+    { "source": "/join-competition", "destination": "/index.html" },
+    { "source": "/challenge/:gameId", "destination": "/index.html" },
+    { "source": "/analytics", "destination": "/index.html" },
+    { "source": "/achievements", "destination": "/index.html" },
+    { "source": "/ai", "destination": "/index.html" },
+    { "source": "/social-media-table", "destination": "/index.html" },
+    { "source": "/review-growth", "destination": "/index.html" },
+    { "source": "/:path*", "destination": "/index.html" }
+  ]
+}
