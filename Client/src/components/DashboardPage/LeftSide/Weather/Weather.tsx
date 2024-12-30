@@ -1,10 +1,6 @@
 import { FaSpinner, FaThermometerEmpty } from "react-icons/fa";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
-import { weatherAPI } from "../../../../Logs/envLog";
-=======
 import { weatherAPI } from "../../../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useTranslation } from "react-i18next";
 
 export default function Weather() {

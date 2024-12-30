@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Login, ServerUrl } from "../../Logs/envLog";
-=======
 import { Login, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";

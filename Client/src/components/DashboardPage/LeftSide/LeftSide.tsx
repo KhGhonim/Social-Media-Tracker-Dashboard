@@ -70,11 +70,7 @@ export default function LeftSide() {
 
   return (
     <div
-<<<<<<< HEAD
-      className={`left-side max-sm:p-5 ${
-=======
       className={`left-side max-lg:p-5 ${
->>>>>>> 1c510ab (Sockets and Updates)
         userCurrentStatus.user.direction === "rtl" ? "lg:pr-32" : "lg:pl-32"
       }  w-full h-full flex flex-col`}
     >

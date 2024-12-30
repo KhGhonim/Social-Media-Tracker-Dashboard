@@ -12,11 +12,7 @@ export default function AchievementForm() {
     ImageForFrontEnd,
   } = useUploadAchievments();
   const { t } = useTranslation();
-<<<<<<< HEAD
-
-=======
   
->>>>>>> 1c510ab (Sockets and Updates)
   return (
     <form
       onSubmit={handleSubmit}

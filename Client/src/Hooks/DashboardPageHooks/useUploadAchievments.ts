@@ -1,9 +1,5 @@
 import { useAppSelector } from "../../Hooks/ReduxHooks";
-<<<<<<< HEAD
-import { ServerUrl, UploadAchievements } from "../../Logs/envLog";
-=======
 import { ServerUrl, UploadAchievements } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { UserCurrentStatus } from "../../types/types";

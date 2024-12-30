@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { ServerUrl, UpdateSMAcc } from "../../Logs/envLog";
-=======
 import { ServerUrl, UpdateSMAcc } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { UserCurrentStatus } from "../../types/types";

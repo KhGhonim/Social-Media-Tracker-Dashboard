@@ -1,9 +1,5 @@
 import { AccountData } from "../types/types";
-<<<<<<< HEAD
-import { GetSpecificAcc, ServerUrl } from "../Logs/envLog";
-=======
 import { GetSpecificAcc, ServerUrl } from "../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 

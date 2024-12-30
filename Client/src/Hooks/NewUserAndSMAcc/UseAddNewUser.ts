@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { AddNewUser, ServerUrl } from "../../Logs/envLog";
-=======
 import { AddNewUser, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState } from "react";
 import toast from "react-hot-toast";
 const UseAddNewUser = () => {

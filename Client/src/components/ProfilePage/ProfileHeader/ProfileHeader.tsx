@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { LuCheckCircle2 } from "react-icons/lu";
-=======
->>>>>>> 1c510ab (Sockets and Updates)
 import { GoXCircle } from "react-icons/go";
 import { UserCurrentStatus } from "../../../types/types";
 import { useAppSelector } from "../../../Hooks/ReduxHooks";
@@ -9,10 +5,7 @@ import { FaSpinner } from "react-icons/fa";
 import GetCheckInOrOutForProfile from "../../../Hooks/ProfileHooks/GetCheckInOrOutForProfile";
 import FetchUserDetails from "../../../Hooks/ProfileHooks/FetchUserDetails";
 import { useTranslation } from "react-i18next";
-<<<<<<< HEAD
-=======
 import { CiCircleCheck } from "react-icons/ci";
->>>>>>> 1c510ab (Sockets and Updates)
 
 export default function ProfileHeader() {
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
@@ -61,11 +54,7 @@ export default function ProfileHeader() {
           </div>
         ) : CheckInOrOutForProfile ? (
           <span className="flex items-center space-x-1 bg-green-500/20 text-green-100 px-3 py-1 rounded-full">
-<<<<<<< HEAD
-            <LuCheckCircle2 className="w-4 h-4" />
-=======
             <CiCircleCheck  className="w-4 h-4" />
->>>>>>> 1c510ab (Sockets and Updates)
             <span>{t('checkIn')}</span>
           </span>
         ) : (

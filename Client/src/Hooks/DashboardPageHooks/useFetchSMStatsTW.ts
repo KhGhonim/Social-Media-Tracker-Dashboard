@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { GetSpecificUserTW, ServerUrl } from "../../Logs/envLog";
-=======
 import { GetSpecificUserTW, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState, useEffect } from "react";
 import { useAppSelector } from "../ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";

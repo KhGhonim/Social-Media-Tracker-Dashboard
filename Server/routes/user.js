@@ -19,12 +19,9 @@ import { fetchUserDetails } from "../controller/User/fetchUserDetails/fetchUserD
 import { updateSettings } from "../controller/User/updateSettings/updateSettings.js";
 import authMiddleware from "../middleware/JWT.js";
 import { fetchPostsTE } from "../controller/User/fetchPostsTE/fetchPostsTE.js";
-<<<<<<< HEAD
-=======
 import { getUserNotificationsTE } from "../controller/Notifications/GetUserNotificationsTE.js";
 import { markAsReadForTeamLeader } from "../controller/Notifications/MarkAsReadForTeamLeader.js";
 import { getUserNotificationsForHandler } from "../controller/Notifications/getUserNotificationsForHandler.js";
->>>>>>> 1c510ab (Sockets and Updates)
 
 const router = express.Router();
 
@@ -60,11 +57,8 @@ router.get("/fetchHandlerAbsences", authMiddleware, fetchHandlerAbsences);
 router.get("/fetchTeamMembersTE", authMiddleware, fetchTeamMembersTE);
 router.get("/fetchUserDetails", authMiddleware, fetchUserDetails);
 router.get("/fetchPostsTE", authMiddleware, fetchPostsTE);
-<<<<<<< HEAD
-=======
 router.get("/fetchNotifications/User", getUserNotificationsForHandler);
 router.get("/notifications/TeamLeader", getUserNotificationsTE);
 router.post("/notifications/TeamLeader/markAsRead", markAsReadForTeamLeader);
->>>>>>> 1c510ab (Sockets and Updates)
 
 export default router;

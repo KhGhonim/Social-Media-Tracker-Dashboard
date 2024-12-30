@@ -20,11 +20,7 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-<<<<<<< HEAD
     if (user && isValidPassword) {
-=======
-    if (user) {
->>>>>>> 1c510ab (Sockets and Updates)
       // Generate token
       const token = jwt.sign(
         { userId: user.id, email: user.email },

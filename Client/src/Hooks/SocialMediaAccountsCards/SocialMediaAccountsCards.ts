@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { GetSocialMediaAccountsCards, ServerUrl } from "../../Logs/envLog";
-=======
 import { GetSocialMediaAccountsCards, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 

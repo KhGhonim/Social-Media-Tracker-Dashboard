@@ -2,11 +2,7 @@ import { useAppSelector } from "../../Hooks/ReduxHooks";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { UserCurrentStatus } from "../../types/types";
-<<<<<<< HEAD
-import { ServerUrl, UpdateSettings } from "../../Logs/envLog";
-=======
 import { ServerUrl, UpdateSettings } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 
 const useUpdateSettings = (data) => {
 

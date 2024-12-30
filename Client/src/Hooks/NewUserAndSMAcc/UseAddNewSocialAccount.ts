@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { ServerUrl, CheckNewAccUser, AddNewSocialAcc } from "../../Logs/envLog";
-=======
 import { ServerUrl, CheckNewAccUser, AddNewSocialAcc } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAppSelector } from "../ReduxHooks";

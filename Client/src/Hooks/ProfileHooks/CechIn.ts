@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { ServerUrl, userCheckIn } from "../../Logs/envLog";
-=======
 import { ServerUrl, userCheckIn } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import toast from "react-hot-toast";
 import { useAppSelector } from "../ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";
@@ -13,14 +9,10 @@ const useCheckIn = () => {
 
   const HandleCheckIn = async () => {
     try {
-<<<<<<< HEAD
-      const res = await fetch(`${ServerUrl}/${userCheckIn}?isCheckedIn=checkIn`, {
-=======
       const QuerryParams = new URLSearchParams({
         projects: JSON.stringify(userCurrentStatus.user.projects),
       });
       const res = await fetch(`${ServerUrl}/${userCheckIn}?isCheckedIn=checkIn&${QuerryParams}`, {
->>>>>>> 1c510ab (Sockets and Updates)
         method: "POST",
         cache: "no-cache",
         credentials: "include",

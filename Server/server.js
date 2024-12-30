@@ -73,11 +73,8 @@ if (cluster.isPrimary) {
       methods: ["GET", "POST"],
     },
   });
-<<<<<<< HEAD
-=======
 
   app.set('io', io);
   
->>>>>>> 1c510ab (Sockets and Updates)
   initializeSocket(io);
 }

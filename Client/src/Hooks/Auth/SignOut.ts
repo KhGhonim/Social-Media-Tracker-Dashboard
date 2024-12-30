@@ -1,10 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../ReduxHooks";
-<<<<<<< HEAD
-import { LogOut, ServerUrl } from "../../Logs/envLog";
-=======
 import { LogOut, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { SignOut } from "../../Redux/userSlice";
 
 const useSignOut = () => {
