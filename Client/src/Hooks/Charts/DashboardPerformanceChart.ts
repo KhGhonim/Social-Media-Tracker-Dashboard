@@ -4,7 +4,6 @@ import { useAppSelector } from "../ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";
 import toast from "react-hot-toast";
 
-
 const usePerformanceChart = () => {
   const [PerformanceChart, setPerformanceChart] = useState([]);
   const [PerformanceChartLoading, setPerformanceChartLoading] = useState(true);
