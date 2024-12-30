@@ -16,12 +16,12 @@
         }
       },
       "previewLimit": 50,
-      "server": "dpg-ct4nl2tumphs73e6vg30-a.oregon-postgres.render.com",
+      "server": "dpg-ctp95l5ds78s73d0ajmg-a.oregon-postgres.render.com",
       "port": 5432,
       "driver": "PostgreSQL",
-      "name": "Social Media Tracker",
-      "username": "socialmediaanalytics",
-      "database": "socialmediaanalyticstracker"
+      "name": "SMD",
+      "database": "smd",
+      "username": "admin"
     }
   ]
 }
