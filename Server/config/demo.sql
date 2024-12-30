@@ -1,1 +1,1 @@
-SELECT * FROM notifications
+SELECT * FROM users
