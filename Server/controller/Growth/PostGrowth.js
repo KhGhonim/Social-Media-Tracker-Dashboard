@@ -1,11 +1,8 @@
 import { pool } from "../../config/database.js";
 import {
   CheckIfAccountExists,
-<<<<<<< HEAD
-=======
   GetTeamLeader,
   GetUserInfo,
->>>>>>> 1c510ab (Sockets and Updates)
   PostGrowthPerPersonBalatarin,
   PostGrowthPerPersonBlogSky,
   PostGrowthPerPersonblogspot,
@@ -26,12 +23,6 @@ import {
   PostGrowthPerPersonvk,
   PostGrowthPerPersonYT,
 } from "../../config/Quries.js";
-<<<<<<< HEAD
-import { platformMetrics } from "../../middleware/Platforms.js";
-
-export const PostGrowth = async (req, res) => {
-  const { stats, platform, id } = req.body;
-=======
 import { formatTimestampForPostgres } from "../../middleware/formatTimestampForPostgres.js";
 import { platformMetrics } from "../../middleware/Platforms.js";
 import { notificationService } from "../Notifications/SaveNotification.js";
@@ -40,7 +31,6 @@ export const PostGrowth = async (req, res) => {
   const { stats, platform, id, } = req.body;
   const { projects, userID } = req.query;
   const io = req.app.get('io');
->>>>>>> 1c510ab (Sockets and Updates)
 
   const accountCheck = await pool.query(CheckIfAccountExists, [id, platform]);
 
@@ -96,8 +86,6 @@ export const PostGrowth = async (req, res) => {
         });
     }
 
-<<<<<<< HEAD
-=======
     // Get User Info
     const userInfo = await pool.query(GetUserInfo, [userID]);
 
@@ -139,7 +127,6 @@ export const PostGrowth = async (req, res) => {
     // Emit notification to the Team Leader
     io.to(`user_${tl_id}`).emit("newNotification", notifications);
 
->>>>>>> 1c510ab (Sockets and Updates)
     res.status(200).json({
       message: "Excellent Job! Growth saved successfully",
     });

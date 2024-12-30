@@ -4,11 +4,7 @@ export default function TeamMemberCell({ member }) {
   return (
     <div className="flex items-center">
       <div className="flex-shrink-0 h-12 w-12">
-<<<<<<< HEAD
-        <div className="h-12 w-12 rounded-full bg-[--navbar] text-[--allwhite] border border-[--navbar] flex items-center justify-center">
-=======
         <div className="h-12 w-12 overflow-hidden rounded-full bg-[--navbar] text-[--allwhite] border border-[--navbar] flex items-center justify-center">
->>>>>>> 1c510ab (Sockets and Updates)
           {member.profile_picture ? (
             <img
               src={member.profile_picture}

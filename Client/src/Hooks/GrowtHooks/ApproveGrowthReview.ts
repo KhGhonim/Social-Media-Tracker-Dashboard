@@ -1,9 +1,5 @@
 import { useAppSelector } from "../../Hooks/ReduxHooks";
-<<<<<<< HEAD
-import { GrowthRevisionService, ServerUrl } from "../../Logs/envLog";
-=======
 import { GrowthRevisionService, ServerUrl } from "../../Keys/envKeys";
->>>>>>> 1c510ab (Sockets and Updates)
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { UserCurrentStatus } from "../../types/types";
@@ -12,11 +8,7 @@ const useApproveGrowthReview = () => {
   const [isloading, setisloading] = useState(false);
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
     useAppSelector((state) => state.user);
-<<<<<<< HEAD
-  const ApproveGrowthReview = async (id, action) => {
-=======
   const ApproveGrowthReview = async (id, action, userId) => {
->>>>>>> 1c510ab (Sockets and Updates)
     setisloading(true);
 
     if (!id) {
@@ -34,11 +26,7 @@ const useApproveGrowthReview = () => {
     })
 
     try {
-<<<<<<< HEAD
-      const res = await fetch(`${ServerUrl}/${GrowthRevisionService}?id=${id}&action=${action}&${queryParams}`, {
-=======
       const res = await fetch(`${ServerUrl}/${GrowthRevisionService}?id=${id}&action=${action}&${queryParams}&userId=${userId}&tl_id=${userCurrentStatus.user.id}`, {
->>>>>>> 1c510ab (Sockets and Updates)
         cache: "no-store",
         method: "POST",
         headers: {

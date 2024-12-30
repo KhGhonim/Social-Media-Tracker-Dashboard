@@ -472,18 +472,12 @@ export const getGrowthByTeamForTE = `
     growth.tl_approval = false 
     AND growth.acc_country = ANY($1::text[])
      GROUP BY 
-<<<<<<< HEAD
-    users.username, users.profile_picture, users.role;
-=======
     users.username, users.id, users.profile_picture, users.role;
->>>>>>> 1c510ab (Sockets and Updates)
 `;
 
 export const SaveGrowthRevisionQuery = `UPDATE growth_users SET tl_approval = true WHERE id = $1 RETURNING *;`;
 export const RejectGrowthRevisionQuery = `DELETE FROM growth_users WHERE id = $1 RETURNING *;`;
 export const socialMediaAccounts = `SELECT * FROM social_media_accounts;`;
-<<<<<<< HEAD
-=======
 
 
 
@@ -539,4 +533,3 @@ export const GetAllGrowthWithUserID = `
     SELECT * FROM growth_users
     AND FROM users WHERE id = $1
     `;
->>>>>>> 1c510ab (Sockets and Updates)

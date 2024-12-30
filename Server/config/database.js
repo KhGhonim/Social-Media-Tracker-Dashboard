@@ -10,9 +10,6 @@ export const pool = new Pool({
   max: 120, // number of clients in the pool
   idleTimeoutMillis: 30000,
   ssl: { rejectUnauthorized: false },
-<<<<<<< HEAD
-=======
-  
->>>>>>> 1c510ab (Sockets and Updates)
+
 });
 

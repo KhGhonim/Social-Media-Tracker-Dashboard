@@ -40,22 +40,14 @@ export default function GrowthTable() {
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center text-gray-500">
                         <CiCalendar className="h-4 w-4 mr-2" />
-<<<<<<< HEAD
-                        <span className="text-sm">
-=======
                         <span className="text-xs">
->>>>>>> 1c510ab (Sockets and Updates)
                           {item?.growth_data[0]?.created_at?.slice(0, 10)}
                         </span>
                       </div>
                       <ActionButtons
                         isloading={isloading}
                         onAction={(action) =>
-<<<<<<< HEAD
-                          ApproveGrowthReview(item.growth_data[0].id, action)
-=======
                           ApproveGrowthReview(item.growth_data[0].id, action, item.id)
->>>>>>> 1c510ab (Sockets and Updates)
                         }
                       />
                     </div>

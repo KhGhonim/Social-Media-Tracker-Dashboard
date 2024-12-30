@@ -1,11 +1,4 @@
 import { pool } from "../../../config/database.js";
-<<<<<<< HEAD
-import { MakeUserCheckOut } from "../../../config/Quries.js";
-
-export const CheckOut = async (req, res) => {
-  let { isCheckedIn } = req.query;
-  const { id } = req.body;
-=======
 import { GetTeamLeader, MakeUserCheckOut } from "../../../config/Quries.js";
 import { formatTimestampForPostgres } from "../../../middleware/formatTimestampForPostgres.js";
 import { notificationService } from "../../Notifications/SaveNotification.js";
@@ -14,14 +7,11 @@ export const CheckOut = async (req, res) => {
   let { isCheckedIn, projects } = req.query;
   const { id } = req.body;
   const io = req.app.get('io');
->>>>>>> 1c510ab (Sockets and Updates)
 
   try {
     if (isCheckedIn) {
       isCheckedIn = false;
       const user = await pool.query(MakeUserCheckOut, [isCheckedIn, id]);
-<<<<<<< HEAD
-=======
 
       const notifications = {
         type: 'check-out',
@@ -55,7 +45,6 @@ export const CheckOut = async (req, res) => {
       // Emit notification to the Team Leader
       io.to(`user_${tl_id}`).emit('newNotification', notifications);
 
->>>>>>> 1c510ab (Sockets and Updates)
       res.status(200).json({ message: "User checked out successfully" });
     }
   } catch (error) {

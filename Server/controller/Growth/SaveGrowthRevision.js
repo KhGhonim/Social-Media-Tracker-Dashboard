@@ -3,11 +3,6 @@ import {
   RejectGrowthRevisionQuery,
   SaveGrowthRevisionQuery,
 } from "../../config/Quries.js";
-<<<<<<< HEAD
-
-export const SaveGrowthRevision = async (req, res) => {
-  const { id, action, projects } = req.query;
-=======
 import { formatTimestampForPostgres } from "../../middleware/formatTimestampForPostgres.js";
 import { notificationService } from "../Notifications/SaveNotification.js";
 
@@ -15,7 +10,6 @@ export const SaveGrowthRevision = async (req, res) => {
   const { id, action, projects, userId, tl_id } = req.query;
 
   const io = req.app.get("io");
->>>>>>> 1c510ab (Sockets and Updates)
 
   if (!id || !action) {
     return res.status(400).json({ message: "Missing required parameters" });
@@ -27,8 +21,6 @@ export const SaveGrowthRevision = async (req, res) => {
     return res.status(400).json({ message: "Invalid projects format" });
   }
 
-<<<<<<< HEAD
-=======
   const notifications = {
     type: 'growth',
     user_id: userId,
@@ -46,7 +38,6 @@ export const SaveGrowthRevision = async (req, res) => {
   // Emit the notification to the user
   io.to(`user_${userId}`).emit("newNotification", notifications);
 
->>>>>>> 1c510ab (Sockets and Updates)
   try {
     if (action === "approve") {
       const result = await pool.query(SaveGrowthRevisionQuery, [id]);
@@ -69,11 +60,8 @@ export const SaveGrowthRevision = async (req, res) => {
         .status(200)
         .json({ message: "Growth revision rejected successfully" });
     }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 1c510ab (Sockets and Updates)
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error" });
