@@ -174,7 +174,7 @@ const useReportGenerator = () => {
     try {
       const formData = new FormData();
       formData.append('file', pdfBlob, `${GenerateReportsForm.reportType}.pdf`);
-      formData.append('upload_preset', `LoDaBey`);
+      formData.append('upload_preset', `Ghonim`);
       const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/raw/upload`,
         {
           method: 'POST',

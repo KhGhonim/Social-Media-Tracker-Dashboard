@@ -9,7 +9,7 @@ export const pool = new Pool({
   port: process.env.DATABASE_PORT ? Number(process.env.DATABASE_PORT) : 5432,
   max: 120, // number of clients in the pool
   idleTimeoutMillis: 30000,
-  // ssl: { rejectUnauthorized: false },
+  ssl: { rejectUnauthorized: false },
   
 });
 

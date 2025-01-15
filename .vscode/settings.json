@@ -22,6 +22,20 @@
       "name": "SMD",
       "database": "smd",
       "username": "admin"
+    },
+    {
+      "pgOptions": {
+        "ssl": {
+          "rejectUnauthorized": true
+        }
+      },
+      "previewLimit": 50,
+      "server": "dpg-ctp95l5ds78s73d0ajmg-a.oregon-postgres.render.com",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "My SMD",
+      "database": "smd",
+      "username": "admin"
     }
   ]
 }
