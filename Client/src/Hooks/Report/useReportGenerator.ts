@@ -53,7 +53,7 @@ const useReportGenerator = () => {
 
     const { width, height } = firstPage.getSize();
 
-    if (GenerateReportsForm.reportType === 'PalestineWeeklyReport') {
+    if (GenerateReportsForm.reportType === 'WeeklyReport') {
       const layoutConfig = reports.PalestineWeeklyReport[0];
 
       firstPage.drawText(GenerateReportsForm.reportDescription, {

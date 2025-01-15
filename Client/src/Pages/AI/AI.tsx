@@ -90,9 +90,9 @@ export default function AI() {
                     <option disabled value="">
                       {t("selectReport")}
                     </option>
-                    <option value="PalestineWeeklyReport">
+                    <option value="WeeklyReport">
                       {" "}
-                      {t("Palestine Weekly Report")}
+                      {t("Weekly Report")}
                     </option>
                     {/* <option value="WeeklyAchievementsReport"> {t("Weekly Achievements Report")}</option>
                     <option value="AfricanArabandNeighboringCountriesReport"> {t("African, Arab and Neighboring Countries Report")}</option> */}
