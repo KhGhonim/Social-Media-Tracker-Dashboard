@@ -1,7 +1,3 @@
-/**
- * Converts a number into a formatted string representation with
- * suffixes "K" for thousands and "M" for millions.
- */
 export function formatNumber(num: number): string {
   if (num === 0) {
     return "0";
@@ -15,10 +11,6 @@ export function formatNumber(num: number): string {
   return num.toString();
 }
 
-/**
- * Calculate the total followers from the array of data?.
- * The followers is the sum of acc_fs for all items in the array.
- */
 export const CalculateFS = (data) => {
   if (data?.length === 0) {
     return 0;
@@ -82,10 +74,6 @@ export const CalculateAllImp = (data) => {
   return calcuteFS;
 };
 
-/**
- * Calculate the total engagement from the array of data?.
- * The engagement is the sum of acc_vs, acc_retweet, acc_post, acc_comments, acc_likes, and acc_karma for all items in the array.
- */
 export const CalculateAllENG = (data) => {
   if (data?.length === 0) {
     return 0;
@@ -192,24 +180,11 @@ export const CalculateAllENGagementSum = (data) => {
   return allData;
 };
 
-/**
- * Calculate team insights from the given data?.
- * The data? should be an array of objects with the following properties:
- * - name: string
- * - comments: number
- * - karma: number
- * - likes: number
- * - posts: number
- * - retweets: number
- * - views: number
- * - votes: number
- *
- * The function will group the stats by name and calculate the total engagement for each team.
- * The result is an object with two properties: TeamNames and Insights.
- * - TeamNames: an array of strings, one for each team
- * - Insights: an array of numbers, one for each team, representing the total engagement
- */
 export const CalculateTeamInsights = (data) => {
+
+  if (data?.length === 0) {
+    return 0;
+  }
   const TeamNames = [];
   const Insights = [];
   // A map to group stats by name
@@ -246,9 +221,6 @@ export const CalculateTeamInsights = (data) => {
   return { TeamNames, Insights };
 };
 
-/**
- * Calculate the team leader board from the given data?.
- * The function will group the data? by name and calculate the total engagement for each team. */
 export const CalculateTeamLeaderBoard = (data) => {
   const groupedData = [];
   if (data?.length === 0) {
@@ -256,7 +228,7 @@ export const CalculateTeamLeaderBoard = (data) => {
   }
 
   data?.forEach((item) => {
-    const { name, followers, posts, engagement} = item;
+    const { name, followers, posts, engagement } = item;
 
     if (!groupedData[name]) {
       groupedData[name] = {
@@ -335,3 +307,164 @@ export const CalculatePosts = (data) => {
 
   return topThree;
 };
+
+export const CalculatePostsOperations = (data) => {
+
+  if (!data || data.length === 0) return [];
+
+  const totalPosts = data.reduce((sum, post) => sum + post.acc_post, 0);
+
+  return totalPosts;
+}
+
+export const CalculateImpressionsOperations = (data) => {
+
+  if (!data || data.length === 0) return [];
+
+  const totalImpressions = data.reduce((sum, post) => sum + post.acc_imp, 0);
+
+  return totalImpressions;
+
+}
+
+export const CalculateEngagementOperations = (data) => {
+
+  if (!data || data.length === 0) return [];
+
+  const totalEngagement = data.reduce((sum, post) => sum + post.acc_comments + post.acc_karma + post.acc_likes + post.acc_pins + post.acc_retweet + post.acc_votes + post.acc_vs + post.acc_articles, 0);
+
+  return totalEngagement;
+
+}
+
+export const CalculateFollowersOperations = (data) => {
+  if (!data || data.length === 0) return [];
+  const totalFollowers = data.reduce((sum, post) => sum + post.acc_fs, 0);
+
+  return totalFollowers;
+
+}
+export const CalculateFollowingOperations = (data) => {
+  if (!data || data.length === 0) return [];
+
+  const totalFollowers = data.reduce((sum, post) => sum + post.acc_fw, 0);
+
+  return totalFollowers;
+
+}
+
+export const CalculateOperationsInsights = (data) => {
+
+  if (data?.length === 0) {
+    return 0;
+  }
+  const ProjectNames = [];
+  const Insights = [];
+  // A map to group stats by name
+  const groupedStats = {};
+
+  data?.forEach((item) => {
+    const country = item.country;
+    const stats = [
+      item.comments,
+      item.karma,
+      item.likes,
+      item.posts,
+      item.retweets,
+      item.views,
+      item.votes,
+    ];
+
+    // If the name exists in the map, combine stats; otherwise, initialize it
+    if (groupedStats[country]) {
+      groupedStats[country] = groupedStats[country].map(
+        (val, idx) => val + stats[idx]
+      );
+    } else {
+      groupedStats[country] = stats;
+    }
+  });
+
+  // Process the grouped stats into TeamNames and Insights
+  for (const [country, combinedStats] of Object.entries(groupedStats)) {
+    ProjectNames.push(country);
+    Insights.push((combinedStats as number[]).reduce((a, b) => a + b, 0));
+  }
+
+  return { ProjectNames, Insights };
+};
+
+export const CalculateOperationsSMTopAccounts = (data) => {
+  if (!data || data.length === 0) {
+    return []; 
+  }
+
+  // Create a map to store aggregated data per platform
+  const platformMap = {};
+
+  data.forEach((item) => {
+    const platform = item.platform;
+    const name = item.name;
+    const projects = item.projects;
+
+    // Initialize a map entry if it doesn't exist
+    if (!platformMap[platform]) {
+      platformMap[platform] = [];
+    }
+
+    // Check if this user is already recorded in the platform; if so, update metrics
+    const existingAccount = platformMap[platform].find((acc) => acc.name === name);
+    if (existingAccount) {
+      existingAccount.likes += item.likes;
+      existingAccount.posts += item.posts;
+      existingAccount.comments += item.comments;
+      existingAccount.retweets += item.retweets;
+      existingAccount.views += item.views;
+      existingAccount.impressions += item.impressions;
+      existingAccount.followers += item.followers;
+
+    } else {
+      // Add a new account with initial metrics
+      platformMap[platform].push({
+        name: item.name,
+        user_id: item.user_id,
+        projects: projects,
+        likes: item.likes,
+        posts: item.posts,
+        comments: item.comments,
+        retweets: item.retweets,
+        views: item.views,
+        username: item.username,
+        impressions: item.impressions,
+        followers: item.followers
+      });
+    }
+  });
+
+  // Find the highest account for each platform based on total engagement 
+  const topAccounts = Object.keys(platformMap).map((platform) => {
+    const accounts = platformMap[platform];
+    const topAccount = accounts.reduce((max, account) => {
+      const currentEngagement =
+        account.likes + account.posts + account.comments + account.retweets + account.views;
+      const maxEngagement =
+        max.likes + max.posts + max.comments + max.retweets + max.views;
+      return currentEngagement > maxEngagement ? account : max;
+    }, accounts[0]);
+
+    return {
+      platform,
+      topAccount,
+      totalEngagement: topAccount.likes + topAccount.posts + topAccount.comments + topAccount.retweets + topAccount.views,
+      username: topAccount.username,
+      followers: topAccount.followers
+    };
+  });
+
+  return topAccounts;
+};
+
+
+
+
+

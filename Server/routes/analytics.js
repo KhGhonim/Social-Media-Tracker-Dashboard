@@ -16,6 +16,8 @@ import authMiddleware from "../middleware/JWT.js";
 import { getGrowthByTeam } from "../controller/Growth/getGrowthByTeam.js";
 import { SaveGrowthRevision } from "../controller/Growth/SaveGrowthRevision.js";
 import { socialMediaAccountsCards } from "../controller/Dashboard/socialMediaAccountsCards/socialMediaAccountsCards.js";
+import { fetchProjectInsights } from "../controller/User/Operations/fetchProjectInsights/fetchProjectInsights.js";
+import { fetchTopAccountsForOperations } from "../controller/User/Operations/fetchTopAccountsForOperations/fetchTopAccountsForOperations.js";
 
 const router = express.Router();
 
@@ -60,4 +62,8 @@ router.get(
 );
 
 router.post("/growthRevisionService", authMiddleware, SaveGrowthRevision);
+
+router.get("/fetchProjectInsights", fetchProjectInsights);
+router.get("/fetchTopAccountsForOperations", fetchTopAccountsForOperations);
+
 export default router;

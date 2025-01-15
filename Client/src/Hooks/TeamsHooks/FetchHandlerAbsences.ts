@@ -27,6 +27,8 @@ const FetchHandlerAbsences = () => {
           credentials: "include",
         });
 
+        
+
         if (!res.ok) {
           toast.error("Failed to fetch data");
           return

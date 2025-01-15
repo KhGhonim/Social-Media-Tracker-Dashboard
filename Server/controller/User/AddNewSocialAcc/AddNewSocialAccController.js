@@ -15,6 +15,8 @@ export const AddNewSocialAccController = async (req, res) => {
     mobileNo,
     state,
     category,
+    RSS,
+    dropbox,
   } = req.body;
 
   const { userId } = req.query;
@@ -37,7 +39,9 @@ export const AddNewSocialAccController = async (req, res) => {
     !password ||
     !mobileNo ||
     !state ||
-    !category
+    !category ||
+    !RSS ||
+    !dropbox
   ) {
     return res
       .status(400)
@@ -58,6 +62,8 @@ export const AddNewSocialAccController = async (req, res) => {
       mobileNo,
       category,
       state,
+      RSS,
+      dropbox,
       userId,
     ]);
     if (result.rowCount === 0) {

@@ -28,6 +28,8 @@ import SoloCompetition from "./Pages/SoloCompetition/SoloCompetition";
 import AI from "./Pages/AI/AI";
 import ReviewGrowth from "./Pages/ReviewGrowth/ReviewGrowth";
 import SocialMediaTable from "./Pages/SocialMediaTable/SocialMediaTable";
+import TeamGames from "./Pages/TeamGames/TeamGames";
+import Reports from "./Pages/Reports/Reports";
 
 const root = document.getElementById("root");
 
@@ -49,6 +51,7 @@ ReactDOM.createRoot(root).render(
             <Route path="/growth" element={<Growth />} />
             <Route path="/ai" element={<AI />} />
             <Route path="/join-competition" element={<HungerGames />} />
+            <Route path="/team-competition/:gameId" element={<TeamGames />} />
             <Route path="/solo-competition" element={<SoloCompetition />} />
             <Route path="/challenge/:gameId" element={<ChallengePage />} />
             <Route path="/profile/account/:accId" element={<UpdateSMAcc />} />
@@ -79,11 +82,23 @@ ReactDOM.createRoot(root).render(
                 </ProtectedRoutes>
               }
             />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoutes
+                  allowedRoles={["Operation Manager", "Team Leader", "Admin"]}
+                >
+                  <Reports />
+                </ProtectedRoutes>
+              }
+            />
 
             <Route
               path="/social-media"
               element={
-                <ProtectedRoutes allowedRoles={["Team Leader", "Admin"]}>
+                <ProtectedRoutes
+                  allowedRoles={["Team Leader", "Admin", "Operation Manager"]}
+                >
                   <SocialMedia />
                 </ProtectedRoutes>
               }

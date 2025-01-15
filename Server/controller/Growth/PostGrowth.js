@@ -29,7 +29,7 @@ import { notificationService } from "../Notifications/SaveNotification.js";
 
 export const PostGrowth = async (req, res) => {
   const { stats, platform, id, } = req.body;
-  const { projects, userID } = req.query;
+  const { projects, userID, role } = req.query;
   const io = req.app.get('io');
 
   const accountCheck = await pool.query(CheckIfAccountExists, [id, platform]);
@@ -122,10 +122,18 @@ export const PostGrowth = async (req, res) => {
 
     // Save notification
     await notificationService.saveNotification(userID, tl_id, notifications.type, notifications.description,
-      notifications.message, notifications.created_at, notifications.is_read);
+      notifications.message, notifications.created_at, notifications.is_read, role);
 
-    // Emit notification to the Team Leader
-    io.to(`user_${tl_id}`).emit("newNotification", notifications);
+
+    const roomName = `user_${tl_id}`;
+    io.in(roomName).fetchSockets().then((sockets) => {
+      if (sockets.length > 0) {
+        io.to(roomName).emit("newNotification", notifications);
+        console.log(`Notification emitted to ${roomName}`);
+      } else {
+        console.log(`No connected sockets in room ${roomName}`);
+      }
+    });
 
     res.status(200).json({
       message: "Excellent Job! Growth saved successfully",

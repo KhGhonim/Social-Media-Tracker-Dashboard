@@ -13,7 +13,7 @@ export default function PhotoCard({ photo, isSelected, onSelect }) {
       relative cursor-pointer group rounded-xl overflow-hidden
       ${
         isSelected
-          ? "ring-2 ring-indigo-500"
+          ? "ring-2 ring-[--navbar-hover] ring-offset-2"
           : "hover:ring-2 hover:ring-indigo-500/50"
       }
     `}
@@ -35,8 +35,8 @@ export default function PhotoCard({ photo, isSelected, onSelect }) {
           {photo.username}
         </h3>
         <p className="text-white/70 text-sm">{photo.platform}</p>
-        <div className="flex gap-4 justify-center text-center text-white/70 text-sm">
-          <p className="flex flex-col justify-center items-center">
+        <div className="flex gap-4 justify-center  text-center text-white/70 text-sm">
+          <p className="flex flex-col justify-center items-center ">
             <FaHeart
               className={`${
                 userCurrentStatus.user.direction === "ltr" ? "mr-2" : "ml-2"
@@ -64,7 +64,7 @@ export default function PhotoCard({ photo, isSelected, onSelect }) {
       </div>
 
       {isSelected && (
-        <div className="absolute top-2 right-2 bg-indigo-500 rounded-full p-1">
+        <div className="absolute top-2 right-2 bg-[--navbar-hover] rounded-full p-1">
           <FaCheck size={16} className="text-white" />
         </div>
       )}

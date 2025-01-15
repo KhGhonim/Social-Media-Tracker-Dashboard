@@ -24,7 +24,7 @@ export const fetchPostsTE = async (req, res) => {
       return res.status(404).json({ message: "Posts not found" });
     }
 
-    res
+    return  res
       .status(200)
       .json({ message: "Posts fetched successfully", data: user.rows });
   } catch (error) {

@@ -22,7 +22,8 @@ const useApproveGrowthReview = () => {
       return;
     }
     const queryParams = new URLSearchParams({
-      projects: JSON.stringify(userCurrentStatus.user.projects)
+      projects: JSON.stringify(userCurrentStatus.user.projects),
+      role: userCurrentStatus.user.role
     })
 
     try {

@@ -48,7 +48,7 @@ export default function SocialMedia() {
   );
   const { FetchTeamInsights, FetchTeamInsightsLoading } =
     useFetchTeamInsights();
-  const { TeamNames, Insights } = CalculateTeamInsights(FetchTeamInsights);
+  const Insights = CalculateTeamInsights(FetchTeamInsights);
   const {
     FetchTeamLeadersLeaderboardTEData,
     FetchTeamLeadersLeaderboardTELoading,
@@ -165,7 +165,7 @@ export default function SocialMedia() {
                   <FaSpinner className="animate-spin" />
                 </div>
               ) : FetchTeamInsights && FetchTeamInsights.length > 0 ? (
-                <TeamInsights TeamNames={TeamNames} Insights={Insights} />
+                <TeamInsights Insights={Insights} />
               ) : null}
             </section>
           </main>

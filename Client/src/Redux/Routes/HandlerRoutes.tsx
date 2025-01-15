@@ -5,5 +5,5 @@ import { Outlet } from "react-router-dom";
 export default function HandlerRoutes() {
   const { userCurrentStatus } = useAppSelector((state) => state.user);
 
-  return userCurrentStatus.user ? <Outlet /> : <NotAllowedPage />;
+  return userCurrentStatus ? <Outlet /> : <NotAllowedPage />;
 }

@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";
 import { SetDirection } from "../../Redux/userSlice";
+import { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
@@ -28,6 +29,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard w-full h-full max-lg:px-3 md:min-h-screen bg-[--bg-color] cairo-ALAPHA max-sm:pb-20">
+      <Toaster />
       <ConsistOfDB />
       <PhoneHeader />
       <Navbar />

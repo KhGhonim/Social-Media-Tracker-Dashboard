@@ -3,7 +3,7 @@ export const InsertNewUser =
 export const CheckIfUserNameExists =
   "SELECT * FROM social_media_accounts WHERE acc_username = $1";
 export const AddNewSocialMediaAccount =
-  "INSERT INTO social_media_accounts (region, country, platform, acc_name, acc_bio, acc_url, acc_username, acc_email, acc_password_hash, acc_mobile, acc_category, acc_state, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *";
+  "INSERT INTO social_media_accounts (region, country, platform, acc_name, acc_bio, acc_url, acc_username, acc_email, acc_password_hash, acc_mobile, acc_category, acc_state, RSS, dropbox, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *";
 export const CheckIfUserExists = "SELECT * FROM users WHERE email = $1";
 export const GetAccountsPerUser =
   "SELECT * FROM social_media_accounts WHERE user_id = $1";
@@ -432,10 +432,7 @@ WHERE u.projects && $1::text[];
 export const getGrowthByTeamForTE = `
   SELECT 
     users.username,
-<<<<<<< HEAD
-=======
     users.id,
->>>>>>> 1c510ab (Sockets and Updates)
     users.profile_picture,
     users.role,
      ARRAY_AGG(
@@ -475,16 +472,13 @@ export const getGrowthByTeamForTE = `
     users.username, users.id, users.profile_picture, users.role;
 `;
 
-export const SaveGrowthRevisionQuery = `UPDATE growth_users SET tl_approval = true WHERE id = $1 RETURNING *;`;
-export const RejectGrowthRevisionQuery = `DELETE FROM growth_users WHERE id = $1 RETURNING *;`;
+export const SaveGrowthRevisionQuery = `UPDATE growth_users SET tl_approval = true WHERE acc_handler = $1 RETURNING *;`;
+export const RejectGrowthRevisionQuery = `DELETE FROM growth_users WHERE acc_handler = $1 AND tl_approval = false RETURNING *;`;
 export const socialMediaAccounts = `SELECT * FROM social_media_accounts;`;
 
-
-
-
 export const SaveNotification = `
-    INSERT INTO notifications (user_id, tl_id, type, description, message, created_at, is_read)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO notifications (user_id, tl_id, type, description, message, created_at, is_read, role)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *
 `;
 
@@ -492,6 +486,7 @@ export const GetUserNotificationsPerTeamLeader = `
     SELECT * FROM notifications 
     WHERE tl_id = $1 
     AND created_at > NOW() - INTERVAL '48 hours'
+    And role = 'Handler'
     ORDER BY created_at DESC
 `;
 
@@ -499,6 +494,7 @@ export const GetUserNotificationsPerHandler = `
     SELECT * FROM notifications 
     WHERE user_id = $1 
     AND created_at > NOW() - INTERVAL '48 hours'
+    And role = 'Team Leader'
     ORDER BY created_at DESC
 `;
 
@@ -510,9 +506,8 @@ export const DeleteOldNotifications = `
 export const MarkNotificationAsRead = `
     UPDATE notifications 
     SET is_read = true 
-    WHERE user_id = $1 AND id = $2
+    WHERE user_id = $1;
 `;
-
 
 export const MarkAsReadForTeamLeader = `
     UPDATE notifications 
@@ -520,10 +515,16 @@ export const MarkAsReadForTeamLeader = `
     WHERE tl_id = $1 AND created_at > NOW() - INTERVAL '48 hours'
 `;
 
+export const UpdateToPendingNotification = `
+    UPDATE notifications 
+    SET direct = true
+    WHERE role = 'Team Leader'
+    AND created_at > NOW() - INTERVAL '24 hours'
+    AND tl_id = $1
+`;
 
 export const GetTeamLeader = `
-    SELECT * FROM users WHERE role = 'Team Leader' AND projects && $1::text[]`
-
+    SELECT * FROM users WHERE role = 'Team Leader' AND projects && $1::text[]`;
 
 export const GetUserInfo = `
     SELECT * FROM users WHERE id = $1
@@ -533,3 +534,82 @@ export const GetAllGrowthWithUserID = `
     SELECT * FROM growth_users
     AND FROM users WHERE id = $1
     `;
+
+export const FetchSuspendedAccountsForOperations = `
+    SELECT 
+    social_media_accounts.*, 
+    users.username,
+    users.id
+FROM social_media_accounts
+JOIN users ON social_media_accounts.user_id = users.id
+WHERE (social_media_accounts.acc_state = 'suspended' OR social_media_accounts.acc_state = 'locked')
+AND users.projects && $1::text[];
+`;
+
+export const fetchHandlerAbsencesForOperationsQuery = `SELECT * FROM users WHERE is_active = false AND projects && $1::text[] AND role != 'Admin';`;
+export const fetchAllActiveAccountsForOperationsQuery = `SELECT * FROM social_media_accounts WHERE acc_state = 'active' AND country = ANY($1::text[]);`;
+export const fetchPostsForOperationsQuery = `SELECT acc_post FROM growth_users WHERE acc_country = ANY($1::text[]) AND created_at >= NOW() - INTERVAL '30 days' AND tl_approval = true;`;
+export const fetchImpressionsForOperationsQuery = `SELECT acc_imp FROM growth_users WHERE acc_country = ANY($1::text[]) AND created_at >= NOW() - INTERVAL '30 days' AND tl_approval = true;`;
+export const fetchEngagementsForOperationsQuery = `SELECT * FROM growth_users WHERE acc_country = ANY($1::text[]) AND created_at >= NOW() - INTERVAL '30 days' AND tl_approval = true;`;
+export const fetchFollowersForOperationsQuery = `SELECT acc_fs FROM growth_users WHERE acc_country = ANY($1::text[]) AND created_at >= NOW() - INTERVAL '30 days' AND tl_approval = true;`;
+export const fetchFollowingForOperationsQuery = `SELECT acc_fw FROM growth_users WHERE acc_country = ANY($1::text[]) AND created_at >= NOW() - INTERVAL '30 days' AND tl_approval = true;`;
+export const ProjectInsightsOperations = `
+  SELECT 
+    growth.acc_vs AS views,
+    growth.acc_karma AS karma,
+    growth.acc_votes AS votes,
+    growth.acc_post AS posts,
+    growth.acc_retweet AS retweets,
+    growth.acc_likes AS likes,
+    growth.acc_comments AS comments,
+    growth.acc_country AS country 
+  FROM 
+    growth_users AS growth
+  WHERE 
+    growth.acc_country = ANY($1::text[]) 
+    AND growth.tl_approval = true;
+`;
+export const FetchTopAccountsForOperations = `
+  SELECT 
+    growth.acc_vs AS views,
+    growth.acc_karma AS karma,
+    growth.acc_votes AS votes,
+    growth.acc_post AS posts,
+    growth.acc_retweet AS retweets,
+    growth.acc_likes AS likes,
+    growth.acc_comments AS comments, 
+    growth.acc_platform AS platform, 
+    growth.acc_imp AS impressions, 
+    growth.acc_fs AS followers, 
+    users.username AS name,
+    users.id AS user_id,
+    users.projects AS projects,
+    SMD.acc_username AS username,
+    users.role AS role
+  FROM 
+    growth_users AS growth
+  JOIN 
+    users ON growth.acc_handler = users.id
+  JOIN 
+    social_media_accounts AS SMD ON growth.acc_handler = SMD.user_id
+  WHERE 
+    growth.acc_country = ANY($1::text[]) 
+    AND growth.tl_approval = true
+    AND users.projects && $1::text[];
+`;
+
+export const InsertNewGameScoreQuery = `
+  INSERT INTO JoinedCompetitions (user_id, type, user_projects, score, Achievement_URL, user_name)
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;
+  `;
+
+export const GetGameDetails = `
+SELECT *
+FROM JoinedCompetitions
+ORDER BY score DESC;
+  `;
+export const InsertNewReportQuery = `INSERT INTO Reports ( description,  reportType,  user_name, 
+user_id, user_projects, url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
+
+export const GetAllReports = `SELECT * FROM Reports;`;
+export const DeleteReport = `DELETE FROM Reports WHERE id = $1;`;

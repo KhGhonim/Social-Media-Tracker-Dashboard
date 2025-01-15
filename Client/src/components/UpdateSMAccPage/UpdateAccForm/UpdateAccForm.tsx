@@ -1,4 +1,5 @@
 import { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateAccForm({
   formData,
@@ -18,6 +19,7 @@ export default function UpdateAccForm({
     }));
   };
 
+  const { t } = useTranslation();
   return (
     <div>
       <Toaster />
@@ -31,7 +33,7 @@ export default function UpdateAccForm({
 
         <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Country
+            {t('country')} 
             </label>
             <select
               name="country"
@@ -40,51 +42,51 @@ export default function UpdateAccForm({
               className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
             >
               <option disabled value="">
-                Select Country
+              {t('selectCountry')}
               </option>
-              <option value="afghanistan">Afghanistan</option>
-              <option value="algeria">Algeria</option>
-              <option value="egypt">Egypt</option>
-              <option value="france">France</option>
-              <option value="germany">Germany</option>
-              <option value="indonesia">Indonesia</option>
-              <option value="iran">Iran</option>
-              <option value="iraq">Iraq</option>
-              <option value="italy">Italy</option>
-              <option value="jordan">Jordan</option>
-              <option value="kuwait">Kuwait</option>
-              <option value="lebanon">Lebanon</option>
-              <option value="libya">Libya</option>
-              <option value="malaysia">Malaysia</option>
-              <option value="mauritania">Mauritania</option>
-              <option value="mexico">Mexico</option>
-              <option value="morocco">Morocco</option>
-              <option value="oman">Oman</option>
-              <option value="pakistan">Pakistan</option>
-              <option value="palestine">Palestine</option>
-              <option value="philippines">Philippines</option>
-              <option value="qatar">Qatar</option>
-              <option value="saudi Arabia">Saudi Arabia</option>
-              <option value="somali Land">Somali Land</option>
-              <option value="somalia">Somalia</option>
-              <option value="spain">Spain</option>
-              <option value="syria">Syria</option>
-              <option value="uae">UAE</option>
-              <option value="sudan">Sudan</option>
-              <option value="yemen">Yemen</option>
-              <option value="thailand">Thailand</option>
-              <option value="tunisia">Tunisia</option>
-              <option value="turkey">Turkey</option>
-              <option value="united states">United States</option>
-              <option value="united kingdom">United Kingdom</option>
-              <option value="russia">Russia</option>
-              <option value="india">India</option>
-              <option value="nepal">Nepal</option>
+              <option value="Afghanistan">{t('afghanistan')}</option>
+              <option value="Algeria">{t('algeria')}</option>
+              <option value="Egypt">{t('egypt')}</option>
+              <option value="France">{t('france')}</option>
+              <option value="Germany">{t('germany')}</option>
+              <option value="Indonesia">{t('indonesia')}</option>
+              <option value="Iran">{t('iran')}</option>
+              <option value="Iraq">{t('iraq')}</option>
+              <option value="Italy">{t('italy')}</option>
+              <option value="Jordan">{t('jordan')}</option>
+              <option value="Kuwait">{t('kuwait')}</option>
+              <option value="Lebanon">{t('lebanon')}</option>
+              <option value="Libya">{t('libya')}</option>
+              <option value="Malaysia">{t('malaysia')}</option>
+              <option value="Mauritania">{t('mauritania')}</option>
+              <option value="Mexico">{t('mexico')}</option>
+              <option value="Morocco">{t('morocco')}</option>
+              <option value="Oman">{t('oman')}</option>
+              <option value="Pakistan">{t('pakistan')}</option>
+              <option value="Palestine">{t('palestine')}</option>
+              <option value="Philippines">{t('philippines')}</option>
+              <option value="Qatar">{t('qatar')}</option>
+              <option value="Saudi Arabia">{t('saudiArabia')}</option>
+              <option value="Somali Land">{t('somaliLand')}</option>
+              <option value="Somalia">{t('somalia')}</option>
+              <option value="Spain">{t('spain')}</option>
+              <option value="Syria">{t('syria')}</option>
+              <option value="UAE">{t('uae')}</option>
+              <option value="Sudan">{t('sudan')}</option>
+              <option value="Yemen">{t('yemen')}</option>
+              <option value="Thailand">{t('thailand')}</option>
+              <option value="Tunisia">{t('tunisia')}</option>
+              <option value="Turkey">{t('turkey')}</option>
+              <option value="United States">{t('unitedStates')}</option>
+              <option value="United Kingdom">{t('unitedKingdom')}</option>
+              <option value="Russia">{t('russia')}</option>
+              <option value="India">{t('india')}</option>
+              <option value="Nepal">{t('nepal')}</option>
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Region
+            {t('selectRegion')}
             </label>
             <select
               name="region"
@@ -93,21 +95,21 @@ export default function UpdateAccForm({
               className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
             >
               <option disabled value="">
-                Select Region
+              {t('selectRegion')}
               </option>
-              <option value="africa">Africa</option>
-              <option value="asia">Asia</option>
-              <option value="gulf">Gulf</option>
-              <option value="north america">North America</option>
-              <option value="south america">South America</option>
-              <option value="australia">Australia</option>
-              <option value="europe">Europe</option>
-              <option value="middle east">Middle East</option>
+              <option value="Africa">{t('africa')}</option>
+              <option value="Asia">{t('asia')}</option>
+              <option value="Gulf">{t('gulf')}</option>
+              <option value="North America">{t('northAmerica')}</option>
+              <option value="South America">{t('southAmerica')}</option>
+              <option value="Australia">{t('australia')}</option>
+              <option value="Europe">{t('europe')}</option>
+              <option value="Middle East">{t('middleEast')}</option>
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Platform
+            {t('platform')} 
             </label>
             <select
               name="platform"
@@ -115,34 +117,32 @@ export default function UpdateAccForm({
               value={formData?.platform}
               className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
             >
-              <option disabled value="">
-                Select Platform
-              </option>
-              <option value="facebook">Facebook</option>
-              <option value="instagram">Instagram</option>
-              <option value="twitter">Twitter</option>
-              <option value="linkedIn">LinkedIn</option>
-              <option value="tiktok">TikTok</option>
-              <option value="youtube">YouTube</option>
-              <option value="pinterest">Pinterest</option>
-              <option value="snapchat">Snapchat</option>
-              <option value="reddit">Reddit</option>
-              <option value="tumblr">Tumblr</option>
-              <option value="blogspot">Blogspot</option>
-              <option value="okru">OK.RU</option>
-              <option value="turkkitap">1000Kitap</option>
-              <option value="blogsky">Blogsky</option>
-              <option value="kizlarsoruyor">Kızlarsoruyor</option>
-              <option value="balatarin">Balatarin</option>
-              <option value="virasty">Virasty</option>
-              <option value="vk">VK</option>
-              <option value="threads">Threads</option>
-              <option value="telegram">Telegram</option>
+            <option disabled value="">{t('platform')}</option>
+              <option value="Facebook">{t('facebook')}</option>
+              <option value="Instagram">{t('instagram')}</option>
+              <option value="Twitter">{t('twitter')}</option>
+              <option value="LinkedIn">{t('linkedin')}</option>
+              <option value="TikTok">{t('tiktok')}</option>
+              <option value="YouTube">{t('youtube')}</option>
+              <option value="Pinterest">{t('pinterest')}</option>
+              <option value="snapchat">{t('Snapchat')}</option>
+              <option value="Reddit">{t('reddit')}</option>
+              <option value="Tumblr">{t('tumblr')}</option>
+              <option value="Blogspot">{t('blogger')}</option>
+              <option value="okru">{t('okru')}</option>
+              <option value="turkkitap">{t('kitap')}</option>
+              <option value="Blogsky">{t('blogsky')}</option>
+              <option value="kizlarsoruyor">{t('kizlarsoruyor')}</option>
+              <option value="balatarin">{t('balatarin')}</option>
+              <option value="virasty">{t('virasty')}</option>
+              <option value="vk">{t('vk')}</option>
+              <option value="threads">{t('threads')}</option>
+              <option value="telegram">{t('telegram')}</option>
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Category
+            {t('category')}
             </label>
             <select
               name="acc_category"
@@ -150,18 +150,16 @@ export default function UpdateAccForm({
               onChange={handleChange}
               className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
             >
-              <option disabled value="">
-                Select Category
-              </option>
-              <option value="personal">Personal</option>
-              <option value="umberlla">Umberlla</option>
-              <option value="native">Native</option>
-              <option value="verified">Verified</option>
+              <option disabled value="">{t('selectCategory')}</option>
+              <option value="Personal">{t('personal')}</option>
+              <option value="Umbrella">{t('umbrella')}</option>
+              <option value="Native">{t('native')}</option>
+              <option value="Verified">{t('verified')}</option>
             </select>
           </div>
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              State
+            {t('state')}
             </label>
             <select
               name="acc_state"
@@ -169,18 +167,16 @@ export default function UpdateAccForm({
               value={formData?.acc_state}
               className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
             >
-              <option disabled value="">
-                Select State
-              </option>
-              <option value="active">Active</option>
-              <option value="suspended">Suspended</option>
-              <option value="locked">Temporary Locked</option>
+            <option disabled value="">{t('selectState')}</option>
+              <option value="Active">{t('active')}</option>
+              <option value="Suspended">{t('suspended')}</option>
+              <option value="Locked">{t('temporaryLocked')}</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Account Name
+            {t('accountName')}
             </label>
             <input
               type="text"
@@ -193,7 +189,7 @@ export default function UpdateAccForm({
 
           <div className="col-span-2">
             <label className="block text-sm font-medium text-[--text-color]">
-              Account Bio
+            {t('accountBio')}
             </label>
             <textarea
               name="acc_bio"
@@ -206,7 +202,7 @@ export default function UpdateAccForm({
 
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Username
+            {t('username')}
             </label>
             <input
               type="text"
@@ -219,7 +215,7 @@ export default function UpdateAccForm({
 
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Email
+            {t('email')}
             </label>
             <input
               type="email"
@@ -232,7 +228,32 @@ export default function UpdateAccForm({
 
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Mobile No
+            {t('dropbox')}
+            </label>
+            <input
+              type="text"
+              name="dropbox"
+              defaultValue={formData?.dropbox}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[--text-color]">
+            {t('RSS')}
+            </label>
+            <input
+              type="text"
+              name="rss"
+              defaultValue={formData?.rss}
+              onChange={handleChange}
+              className="mt-1 block w-full rounded-lg border border-gray-300 text-[--text-color] bg-[--bg-color] px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[--navbar]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-[--text-color]">
+            {t('mobileNo')}
             </label>
             <input
               type="tel"
@@ -244,7 +265,7 @@ export default function UpdateAccForm({
           </div>
           <div>
             <label className="block text-sm font-medium text-[--text-color]">
-              Password
+            {t('password')}
             </label>
             <input
               type="tel"
@@ -262,13 +283,13 @@ export default function UpdateAccForm({
             onClick={onCancel}
             className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg border border-gray-300 text-[--text-color] hover:bg-gray-200"
           >
-            Cancel
+          {t('Cancel')}
           </button>
           <button
             type="submit"
             className="px-4 py-2 bg-[--navbar] text-white rounded-lg hover:bg-[--navbar-hover]"
           >
-            Save Changes
+          {t('saveAccount')}
           </button>
         </div>
       </form>

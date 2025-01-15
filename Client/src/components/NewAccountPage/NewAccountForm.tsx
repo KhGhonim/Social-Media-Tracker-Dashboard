@@ -223,6 +223,37 @@ export default function NewAccountForm({
           />
         </div>
 
+
+        {/* Dropbox and Email */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-[--text-color] mb-1">
+            {t('dropbox')} <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="dropbox"
+              required
+              className="block w-full rounded-lg border bg-[--bg-color] border-gray-300 shadow-sm focus:ring-2 focus:ring-[--navbar] focus:outline-none p-3"
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[--text-color] mb-1">
+            {t('RSS')} <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="RSS"
+              required
+              className="block w-full rounded-lg border bg-[--bg-color] border-gray-300 shadow-sm focus:ring-2 focus:ring-[--navbar] focus:outline-none p-3"
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+
+
         {/* Username and Email */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>

@@ -11,6 +11,7 @@ const useCheckOut = () => {
     try {
       const QuerryParams = new URLSearchParams({
         projects: JSON.stringify(userCurrentStatus.user.projects),
+        role : userCurrentStatus.user.role
       });
 
       const res = await fetch(`${ServerUrl}/${userCheckOut}?isCheckedIn=checkOut&${QuerryParams}`, {

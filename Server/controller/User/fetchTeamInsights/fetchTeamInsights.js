@@ -26,7 +26,7 @@ export const fetchTeamInsights = async (req, res) => {
         .json({ message: "Insights for the team not found" });
     }
 
-    res
+    return  res
       .status(200)
       .json({
         message: "Insights for the team fetched successfully",

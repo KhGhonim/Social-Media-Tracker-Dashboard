@@ -55,13 +55,13 @@ export default function ProfileDropDown() {
             src={data.profile_picture as string}
             alt="Avatar"
             loading="lazy"
-            className="h-8 w-8 object-cover rounded-full border-2 border-indigo-500"
+            className="h-8 w-8 object-cover rounded-full border-2 border-[--navbar]"
           />
         ) : (
           <img
             src="https://avatar.iran.liara.run/public/84"
             alt="Avatar"
-            className="h-8 w-8 rounded-full border-2 border-indigo-500"
+            className="h-8 w-8 rounded-full border-2 border-[--navbar]"
           />
         )}
 

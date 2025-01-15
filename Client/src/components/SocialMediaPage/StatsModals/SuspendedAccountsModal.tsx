@@ -23,9 +23,9 @@ export default function SuspendedAccountsModal({
     <div className="space-y-6 fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div
         ref={ref}
-        className="overflow-hidden bg-[--bg-color] mx-2 overflow-y-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2 p-4 sm:p-6 rounded-2xl shadow-lg"
+        className="overflow-hidden bg-[--bg-color] mx-2 overflow-y-auto overflow-x-auto w-full sm:w-3/4 md:w-2/3 lg:w-1/2 p-4 sm:p-6 rounded-2xl shadow-lg"
       >
-        <table className="min-w-full table-auto border-collapse ">
+        <table className="min-w-full table-auto border-collapse  ">
           <thead className="bg-[--rightSide-bg-color] rounded-xl mb-1">
             <tr>
               <th className="px-4 py-3 text-left text-xs sm:text-sm font-semibold text-[--text-color]">

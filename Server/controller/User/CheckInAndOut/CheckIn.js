@@ -4,7 +4,7 @@ import { formatTimestampForPostgres } from "../../../middleware/formatTimestampF
 import { notificationService } from "../../Notifications/SaveNotification.js";
 
 export const CheckIn = async (req, res) => {
-  let { isCheckedIn, projects } = req.query;
+  let { isCheckedIn, projects, role } = req.query;
   const { id } = req.body;
   const io = req.app.get('io');
 
@@ -40,10 +40,18 @@ export const CheckIn = async (req, res) => {
 
       // Save notification
       await notificationService.saveNotification(notifications.user_id, tl_id, notifications.type, notifications.description,
-        notifications.message, notifications.created_at, notifications.is_read);
+        notifications.message, notifications.created_at, notifications.is_read, role);
 
       // Emit notification to the Team Leader
-      io.to(`user_${tl_id}`).emit('newNotification', notifications);
+      const roomName = `user_${tl_id}`;
+      io.in(roomName).fetchSockets().then((sockets) => {
+        if (sockets.length > 0) {
+          io.to(roomName).emit("newNotification", notifications);
+          console.log(`Notification emitted to ${roomName}`);
+        } else {
+          console.log(`No connected sockets in room ${roomName}`);
+        }
+      });
 
       res.status(200).json({ message: "User checked in successfully" });
 

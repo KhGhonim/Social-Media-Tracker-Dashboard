@@ -30,6 +30,19 @@ const UseLogin = () => {
         },
         body: JSON.stringify({ email, password }),
       });
+
+      // Handle rate limit response
+      if (response.status === 429) {
+        const retryAfter = response.headers.get('retry-after');
+        const minutes = retryAfter ? Math.ceil(parseInt(retryAfter) / 60) : 15;
+
+        toast.error(
+          `Too many login attempts. Please try again in ${minutes} minutes.`
+        );
+        setloading(false);
+        return;
+      }
+
       const data = await response.json();
 
       if (!response.ok) {

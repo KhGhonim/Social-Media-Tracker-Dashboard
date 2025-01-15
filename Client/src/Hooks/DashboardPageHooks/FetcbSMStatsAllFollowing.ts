@@ -23,6 +23,15 @@ const FetcbSMStatsAllFollowing = () => {
           },
           credentials: "include",
         });
+        if (res.status === 429) {
+          const retryAfter = res.headers.get('retry-after');
+          const minutes = retryAfter ? Math.ceil(parseInt(retryAfter) / 60) : 15;
+
+          toast.error(
+            `Too many requests. Please try again in ${minutes} minutes.`
+          );
+          return;
+        }
 
         if (!res.ok) {
           toast.error("Failed to fetch data");

@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHooks";
 import { useEffect } from "react";
 import { UserCurrentStatus } from "../../types/types";
 import { SetDirection } from "../../Redux/userSlice";
+import Loading from "../../Pages/Loading/Loading";
 
 const Profile = () => {
   const { HandleCheckIn } = useCheckIn();
@@ -36,7 +37,6 @@ const Profile = () => {
     }
   }, [dispatch, userCurrentStatus.user.direction]);
 
-  
   return (
     <div className="cairo-ALAPHA bg-[--bg-color]">
       <Toaster />
@@ -44,30 +44,34 @@ const Profile = () => {
       <Navbar />
       <Header />
       <Sidebar />
-      <div className="min-h-screen  flex justify-center items-center p-6">
-        <div className="max-w-4xl w-full bg-[--rightSide-bg-color] text-[--text-color] shadow-2xl rounded-2xl overflow-hidden">
-          {/* Profile Section */}
-          <ProfileHeader />
-          {/* Performance Section */}
-          <Performance />
-          {/* Achievements Section */}
-          <Achievements />
-          <ProfileHungerGames />
-          {/* Connected Accounts Section */}
-          {loading ? (
-            <div className="flex w-full h-full items-center justify-center">
-              <FaSpinner className="animate-spin" />
-            </div>
-          ) : (
-            <ConnectedAccounts data={data} />
-          )}
-          {/* Actions Section */}
-          <CheckInOut
-            HandleCheckIn={HandleCheckIn}
-            HandleCheckOut={HandleCheckOut}
-          />
-        </div>
-      </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <main className="min-h-screen  flex justify-center items-center p-6">
+          <div className="max-w-4xl w-full bg-[--rightSide-bg-color] text-[--text-color] shadow-2xl rounded-2xl overflow-hidden">
+            {/* Profile Section */}
+            <ProfileHeader />
+            {/* Performance Section */}
+            <Performance />
+            {/* Achievements Section */}
+            <Achievements />
+            <ProfileHungerGames />
+            {/* Connected Accounts Section */}
+            {loading ? (
+              <div className="flex w-full h-full items-center justify-center">
+                <FaSpinner className="animate-spin" />
+              </div>
+            ) : (
+              <ConnectedAccounts data={data} />
+            )}
+            {/* Actions Section */}
+            <CheckInOut
+              HandleCheckIn={HandleCheckIn}
+              HandleCheckOut={HandleCheckOut}
+            />
+          </div>
+        </main>
+      )}
     </div>
   );
 };

@@ -16,7 +16,7 @@ export default function FilterBar({
           <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[--navbar] w-5 h-5" />
           <input
             type="text"
-            placeholder="Search accounts..."
+            placeholder={t("Search accounts...")}
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[--navbar] outline-none focus:border-[--navbar]"
@@ -29,7 +29,9 @@ export default function FilterBar({
             onChange={(e) => onPlatformChange(e.target.value)}
             className="px-6 py-2 border rounded-lg focus:ring-2 focus:ring-[--navbar] outline-none focus:border-[--navbar]"
           >
-            <option value="">All Platforms</option>
+            <option value="">
+              {t("All Platforms")}
+            </option>
             <option value="Facebook">{t("facebook")}</option>
             <option value="Instagram">{t("instagram")}</option>
             <option value="Twitter">{t("twitter")}</option>

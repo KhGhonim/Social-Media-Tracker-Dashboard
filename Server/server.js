@@ -11,6 +11,7 @@ import initializeSocket from "./socket/socket.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { task } from "./controller/Automate/ResetCheckInAndOut/ResetCheckInAndOut.js";
+import rateLimit from "express-rate-limit";
 const numCPUs = cpus().length;
 dotenv.config();
 
@@ -25,7 +26,10 @@ if (cluster.isPrimary) {
     cluster.fork(); // Replace the dead worker
   });
 } else {
+  
   const app = express();
+
+
 
   // Middleware
   app.use(
@@ -37,14 +41,24 @@ if (cluster.isPrimary) {
   );
   app.use(cookieParser());
   app.use(express.json());
-
+  
+  // Trust the reverse proxy (Render) for correct IP handling
+  app.set('trust proxy', 1); 
   // Redis client setup
   // const redisClient = Redis.createClient({
   //   url: process.env.REDIS_URL || "redis://localhost:6379",
   // });
 
-  // await redisClient.connect()  Redis client needs to be connected in newer versions
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 250, // Limit each IP to 100 requests per windowMs
+    message: { message: 'Too many action attempts, please try again later.' },
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  });
 
+  // await redisClient.connect()  Redis client needs to be connected in newer versions
+  app.use(limiter);
   // Routes
   app.get("/", async (req, res) => {
     res.send("Hello World!");

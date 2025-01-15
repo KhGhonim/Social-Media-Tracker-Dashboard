@@ -28,7 +28,7 @@ export default function Sidebar() {
       </Link>
 
       {/* SideBar Content */}
-      <div className="sidebar-content mt-16 space-y-6 flex flex-col">
+      <div className="sidebar-content mt-12 space-y-6 flex flex-col">
         {DesktopSideBar.map((item, i) => {
           const isActive = location.pathname === item.path;
           const role = userCurrentStatus.user.role;

@@ -19,14 +19,14 @@ export default function authMiddleware(req, res, next) {
       const remainingTime = user.exp * 1000 - Date.now();
       if (remainingTime < 3600000) {
         const newToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-          expiresIn: "24h",
+          expiresIn: "72h",
         });
 
         res.cookie("alphaToken", newToken, {
           httpOnly: true,
           secure: process.env.NODE_ENV !== "development",
           sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
-          maxAge: 24 * 60 * 60 * 1000, // 24 hours
+          maxAge: 72 * 60 * 60 * 1000, // 72 hours
         });
       }
 

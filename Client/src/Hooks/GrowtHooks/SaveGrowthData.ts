@@ -45,6 +45,7 @@ const UseSaveGrowth = () => {
     try {
       const queryParams = new URLSearchParams({
         projects: JSON.stringify(userCurrentStatus.user.projects),
+        role: userCurrentStatus.user.role,
       });
 
       const res = await fetch(

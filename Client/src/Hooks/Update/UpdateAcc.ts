@@ -17,6 +17,8 @@ const useUpdateAcc = (data) => {
     platform: data.platform,
     region: data.region,
     acc_category: data.acc_category,
+    dropbox: data.dropbox,
+    rss: data.rss,
     id: data.id
   });
   const [isEditing, setIsEditing] = useState(false);
@@ -36,6 +38,8 @@ const useUpdateAcc = (data) => {
         platform: data.platform,
         region: data.region,
         acc_category: data.acc_category,
+        dropbox: data.dropbox,
+        rss: data.rss,
         id: data.id
       }
     );

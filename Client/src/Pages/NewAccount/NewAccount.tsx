@@ -37,8 +37,6 @@ export default function NewAccount() {
       document.documentElement.dir = direction;
     }
   }, [dispatch, userCurrentStatus.user.direction]);
-
-
   return (
     <div className="cairo-ALAPHA bg-[--bg-color] lg:pb-10">
       <Toaster />

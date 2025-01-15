@@ -3,20 +3,6 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAppSelector } from "../ReduxHooks";
 import { UserCurrentStatus } from "../../types/types";
-
-/**
- * Custom hook for managing the creation of a new social account.
- * 
- * Provides state management for user input fields and handles the submission
- * of user data to the server. Displays success or error messages based on
- * the server response.
- * 
- * @returns {Object} - An object containing:
- *   - formData: State containing user input values like email, password, role, etc.
- *   - setFormData: Function to update formData state.
- *   - isLoading: Boolean indicating whether the submission is in progress.
- *   - handleSubmit: Function to handle form submission, making a POST request to create a new user.
- */
 const UseAddNewSocialAccount = () => {
   const [formData, setFormData] = useState({
     region: "",
@@ -31,12 +17,12 @@ const UseAddNewSocialAccount = () => {
     mobileNo: "",
     state: "",
     category: "",
+    dropbox: "",
+    RSS: "",
   });
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
     useAppSelector((state) => state.user);
-
   const [isLoading, setisLoading] = useState(false);
-  console.log(formData)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setisLoading(true);
@@ -52,7 +38,9 @@ const UseAddNewSocialAccount = () => {
       !formData.region ||
       !formData.username ||
       !formData.category ||
-      !formData.state
+      !formData.state ||
+      !formData.dropbox ||
+      !formData.RSS
     ) {
       toast.error("Please fill all the fields");
       setisLoading(false);

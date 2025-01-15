@@ -2,23 +2,26 @@ import { CiCalendar } from "react-icons/ci";
 import ActionButtons from "../ActionButtons/ActionButtons";
 import PlatformMetrics from "../PlatformMetrics/PlatformMetrics";
 import TeamMemberCell from "../TeamMemberCell/TeamMemberCell";
-import GetGrowthByTeam from "../../../Hooks/GrowtHooks/GetGrowthByTeam";
 import { FaSpinner } from "react-icons/fa";
 import useApproveGrowthReview from "../../../Hooks/GrowtHooks/ApproveGrowthReview";
 import { IoAlertCircleOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
-export default function GrowthTable() {
-  const { GetGrowthByTeamTEData, GetGrowthByTeamTELoading } = GetGrowthByTeam();
+export default function GrowthTable({
+  GetGrowthByTeamTEData,
+  GetGrowthByTeamTELoading,
+}) {
   const { ApproveGrowthReview, isloading } = useApproveGrowthReview();
-
+    const { t } = useTranslation();
+  
   return (
     <div className="p-6 max-w-6xl mx-auto max-lg:pb-20">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-[--text-color] mb-2">
-          Social Media Growth Reviews
+          {t("Social Media Growth Reviews")}
         </h1>
         <p className="text-[--text-color]">
-          Review and manage team members' social media performance metrics
+          {t("Review and manage team members' social media performance metrics")}
         </p>
       </div>
 
@@ -47,7 +50,11 @@ export default function GrowthTable() {
                       <ActionButtons
                         isloading={isloading}
                         onAction={(action) =>
-                          ApproveGrowthReview(item.growth_data[0].id, action, item.id)
+                          ApproveGrowthReview(
+                            item.growth_data[0].id,
+                            action,
+                            item.id
+                          )
                         }
                       />
                     </div>
@@ -66,17 +73,19 @@ export default function GrowthTable() {
         </div>
       ) : (
         <div className="px-6 py-4 max-w-lg mx-auto  rounded-lg">
-        {/* Alert */}
-        <div className="flex items-start bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-6">
-          <IoAlertCircleOutline  className="h-5 w-5 text-yellow-500 mr-3" />
-          <div>
-            <h3 className="font-medium text-yellow-700">No Data Found</h3>
-            <p className="text-sm text-yellow-700 mt-1">
-              We couldn't find any metrics for your teams's account at this time.
-            </p>
+          {/* Alert */}
+          <div className="flex items-start bg-yellow-100 border border-yellow-300 rounded-lg p-4 mb-6">
+            <IoAlertCircleOutline className="h-5 w-5 text-yellow-500 mr-3" />
+            <div>
+              <h3 className="font-medium text-yellow-700">
+                {t("No Data Found")}
+              </h3>
+              <p className="text-sm text-yellow-700 mt-1">
+                {t(`We couldn't find any metrics for your teams's account at this time.`)}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
       )}
     </div>
   );

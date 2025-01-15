@@ -23,13 +23,14 @@ const useUploadAchievments = () => {
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
     useAppSelector((state) => state.user);
 
-  const handleInputChange = (e: React.ChangeEvent<
-    HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-  >) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
     setachievementForm((prev) => ({ ...prev, [name]: value }));
-  }
-
+  };
 
   const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -48,9 +49,15 @@ const useUploadAchievments = () => {
       return;
     }
 
-    if (!achievementForm.description || !achievementForm.platform ||
-      !achievementForm.country || !achievementForm.accountName || !achievementForm.accountUrl ||
-      !achievementForm.contentDirection || !achievementForm.Date) {
+    if (
+      !achievementForm.description ||
+      !achievementForm.platform ||
+      !achievementForm.country ||
+      !achievementForm.accountName ||
+      !achievementForm.accountUrl ||
+      !achievementForm.contentDirection ||
+      !achievementForm.Date
+    ) {
       toast.error("Please fill in all fields");
       setisLoading(false);
       return;
@@ -66,7 +73,6 @@ const useUploadAchievments = () => {
       return;
     }
 
-
     const formData = new FormData();
     formData.append("ImageForBackEnd", ImageForBackEnd);
     formData.append("Comments", achievementForm.Comments);
@@ -80,18 +86,28 @@ const useUploadAchievments = () => {
     formData.append("platform", achievementForm.platform);
     formData.append("description", achievementForm.description);
 
-
     const queryParams = new URLSearchParams({
       projects: JSON.stringify(userCurrentStatus.user.projects),
     });
 
     try {
+      const res = await fetch(
+        `${ServerUrl}/${UploadAchievements}?UserId=${userCurrentStatus.user.id}&${queryParams}`,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
+      if (res.status === 429) {
+        const retryAfter = res.headers.get("retry-after");
+        const minutes = retryAfter ? Math.ceil(parseInt(retryAfter) / 60) : 15;
 
-      const res = await fetch(`${ServerUrl}/${UploadAchievements}?UserId=${userCurrentStatus.user.id}&${queryParams}`, {
-        method: "POST",
-        body: formData,
-        credentials: "include",
-      });
+        toast.error(
+          `Too many requests. Please try again in ${minutes} minutes.`
+        );
+        return;
+      }
       const data = await res.json();
 
       if (!res.ok) {
@@ -150,11 +166,19 @@ const useUploadAchievments = () => {
         Comments: "",
         Shares: "",
       });
-
     }
+  };
+  return {
+    handleSubmit,
+    handleInputChange,
+    handleImage,
+    ImageForFrontEnd,
+    achievementForm,
+    ImageForBackEnd,
+    isLoading,
+    setImageForBackEnd,
+    setachievementForm,
+  };
+};
 
-  }
-  return { handleSubmit, handleInputChange, handleImage, ImageForFrontEnd, achievementForm, ImageForBackEnd, isLoading, setImageForBackEnd, setachievementForm }
-}
-
-export default useUploadAchievments
+export default useUploadAchievments;

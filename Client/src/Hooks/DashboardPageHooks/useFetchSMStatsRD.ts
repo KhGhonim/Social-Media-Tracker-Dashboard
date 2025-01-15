@@ -16,18 +16,32 @@ const useFetchSMStatsRD = () => {
       setLoadingRD(true);
       setError(null);
       try {
-        const res = await fetch(`${ServerUrl}/${GetSpecificUserRD}?userID=${userCurrentStatus.user.id}`, {
-          cache: "no-store",
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        });
+        const res = await fetch(
+          `${ServerUrl}/${GetSpecificUserRD}?userID=${userCurrentStatus.user.id}`,
+          {
+            cache: "no-store",
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          }
+        );
+        if (res.status === 429) {
+          const retryAfter = res.headers.get("retry-after");
+          const minutes = retryAfter
+            ? Math.ceil(parseInt(retryAfter) / 60)
+            : 15;
+
+          toast.error(
+            `Too many requests. Please try again in ${minutes} minutes.`
+          );
+          return;
+        }
 
         if (!res.ok) {
           toast.error("Failed to fetch data");
-          return
+          return;
         }
 
         const jsonData = await res.json();

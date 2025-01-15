@@ -31,7 +31,12 @@ import balatarin from "../assets/balatarin.jpg";
 import kizlarsoruyor from "../assets/KS.jpg";
 import { SocialPlatform } from "../types/types";
 import { GrUserManager } from "react-icons/gr";
-import { TbSocial } from "react-icons/tb";
+import { TbReportSearch, TbSocial } from "react-icons/tb";
+import Sudan from "../assets/Flag-Sudan.webp";
+import Iran from "../assets/Flag_of_Iran.svg.png";
+import Palestine from "../assets/Flag_of_Palestine.svg.webp";
+import Turkey from "../assets/Flag_of_Turkey.svg.webp";
+import UAE from "../assets/Flag_of_the_United_Arab_Emirates.svg.png";
 
 export const DesktopSideBar = [
   {
@@ -89,6 +94,12 @@ export const DesktopSideBar = [
     path: "/ai",
     icon: <GiArtificialHive />,
     WhoCanSee: ["Admin", "Operation Manager"],
+  },
+  {
+    name: "Reports Management",
+    path: "/reports",
+    icon: <TbReportSearch />,
+    WhoCanSee: ["Team Leader", "Operation Manager", "Admin"],
   },
 ];
 
@@ -180,6 +191,24 @@ export const TeamLeaderStats = [
     value: "5",
     icon: <FaTasks />,
   },
+  {
+    title: "suspendedAccounts",
+    value: "8",
+    icon: <MdNoAccounts />,
+  },
+  {
+    title: "activeAccounts",
+    value: "300",
+    icon: <IoPersonCircle />,
+  },
+  {
+    title: "todayAbsenceHandler",
+    value: "1",
+    icon: <IoIosPerson />,
+  },
+];
+
+export const OperationManagerStats = [
   {
     title: "suspendedAccounts",
     value: "8",
@@ -664,3 +693,43 @@ export const mockData = [
     status: "pending",
   },
 ];
+
+export const FlagCountries = {
+  uae: UAE,
+  sudan: Sudan,
+  palastine: Palestine,
+  turkey: Turkey,
+  iran: Iran,
+};
+
+export const reports = {
+  PalestineWeeklyReport: [
+    {
+      x: 500,
+      y: 200,
+      photoLayouts: [
+        { x: 70, y: 1290, width: 200, height: 300 },
+        { x: 320, y: 1290, width: 200, height: 300 },
+        { x: 570, y: 1290, width: 200, height: 300 },
+        { x: 40, y: 490, width: 220, height: 330 },
+        { x: 310, y: 490, width: 220, height: 330 },
+        { x: 575, y: 490, width: 225, height: 330 },
+        { x: 40, y: 890, width: 220, height: 330 },
+        { x: 310, y: 890, width: 220, height: 330 },
+        { x: 575, y: 890, width: 225, height: 330 },
+        { x: 40, y: 1270, width: 220, height: 330 },
+        { x: 310, y: 1270, width: 220, height: 330 },
+        { x: 575, y: 1270, width: 225, height: 330 },
+        { x: 40, y: 490, width: 220, height: 330 },
+        { x: 310, y: 490, width: 220, height: 330 },
+        { x: 575, y: 490, width: 225, height: 330 },
+        { x: 40, y: 890, width: 220, height: 330 },
+        { x: 310, y: 890, width: 220, height: 330 },
+        { x: 575, y: 890, width: 225, height: 330 },
+        { x: 40, y: 1270, width: 220, height: 330 },
+        { x: 310, y: 1270, width: 220, height: 330 },
+        { x: 575, y: 1270, width: 225, height: 330 },
+      ],
+    },
+  ],
+};

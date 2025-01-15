@@ -16,9 +16,11 @@ import { Toaster } from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHooks";
 import { useEffect } from "react";
 import { SetDirection } from "../../Redux/userSlice";
+import { useTranslation } from "react-i18next";
 
 export default function UpdateSMAcc() {
   const { accId } = useParams();
+  const { t } = useTranslation();
   const { data, loading } = useSpecificAcc(accId);
   const { handleSubmit, isEditing, formData, setFormData, setIsEditing } =
     useUpdateAcc(data);
@@ -48,6 +50,8 @@ export default function UpdateSMAcc() {
     country,
     platform,
     region,
+    dropbox,
+    rss,
   } = data as unknown as AccountData;
 
   if (loading) {
@@ -82,18 +86,22 @@ export default function UpdateSMAcc() {
         <Navbar />
         <Header />
         <Sidebar />
-        <div className="h-full lg:min-h-screen pb-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div
+          className={`h-full lg:min-h-screen pb-20  ${
+            userCurrentStatus.user.direction === "rtl" ? "lg:pr-32" : "lg:pl-32"
+          }`}
+        >
+          <div className={`px-4 sm:px-6 lg:px-8 py-8`}>
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-bold text-[--text-color]">
-                Profile
+                {t("profile")}
               </h1>
               <button
                 onClick={() => setIsEditing(true)}
                 className="flex items-center gap-2 px-4 py-2 bg-[--navbar] text-white rounded-lg hover:bg-[--navbar-hover] shadow-md transition-all durations-300 ease-in-out"
               >
                 <FaPencil className="w-4 h-4" />
-                Edit Profile
+                <span>{t("Edit Profile")}</span>
               </button>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -116,6 +124,8 @@ export default function UpdateSMAcc() {
                 acc_url={acc_url}
                 region={region}
                 country={country}
+                dropbox={dropbox}
+                rss={rss}
               />
             </div>
           </div>

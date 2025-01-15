@@ -24,7 +24,7 @@ export const fetchSuspendedAccountsForTE = async (req, res) => {
       return res.status(404).json({ message: "Suspended accounts not found" });
     }
 
-    res
+    return res
       .status(200)
       .json({ message: "Accounts fetched successfully", accounts: user.rows });
   } catch (error) {

@@ -23,7 +23,7 @@ export default function AbsenceHandlerModal({
     <div className="space-y-6 fixed inset-0 bg-black/50 flex items-center justify-center z-50">
       <div
         ref={ref}
-        className="overflow-hidden bg-[--bg-color] w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-2 overflow-y-auto p-4 sm:p-6 rounded-2xl shadow-lg"
+        className="overflow-hidden bg-[--bg-color] w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-2 overflow-y-auto overflow-x-auto p-4 sm:p-6 rounded-2xl shadow-lg"
       >
         <table className="min-w-full table-auto border-collapse">
           <thead className="bg-[--rightSide-bg-color] rounded-xl mb-1">

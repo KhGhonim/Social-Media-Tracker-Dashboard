@@ -79,7 +79,7 @@ export default function LeftSide() {
         AllFollowrsLoading={AllFollowrsLoading}
         UserStats={UserStats}
         Styles={"grid grid-cols-1 md:grid-cols-2 gap-6 py-6 w-full  "}
-        HandleTeamLeaderPopUpModel={null}
+        HandleTeamLeaderPopUpModel={undefined}
       />
       {PerformanceChartLoading ? (
         <div className="flex w-full h-full items-center justify-center">

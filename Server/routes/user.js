@@ -22,6 +22,20 @@ import { fetchPostsTE } from "../controller/User/fetchPostsTE/fetchPostsTE.js";
 import { getUserNotificationsTE } from "../controller/Notifications/GetUserNotificationsTE.js";
 import { markAsReadForTeamLeader } from "../controller/Notifications/MarkAsReadForTeamLeader.js";
 import { getUserNotificationsForHandler } from "../controller/Notifications/getUserNotificationsForHandler.js";
+import { markAsReadForUserController } from "../controller/Notifications/markAsReadForUser.js";
+import { fetchSuspendedAccountsForOperations } from "../controller/User/Operations/fetchSuspendedAccountsForOperations/fetchSuspendedAccountsForOperations.js";
+import { fetchHandlerAbsencesForOperations } from "../controller/User/Operations/fetchHandlerAbsencesForOperations/fetchHandlerAbsencesForOperations.js";
+import { fetchAllActiveAccountsForOperations } from "../controller/User/Operations/fetchAllActiveAccountsForOperations/fetchAllActiveAccountsForOperations.js";
+import { fetchPostsForOperations } from "../controller/User/Operations/fetchPostsForOperations/fetchPostsForOperations.js";
+import { fetchImpressionsForOperations } from "../controller/User/Operations/fetchImpressionsForOperations/fetchImpressionsForOperations.js";
+import { fetchEngagementsForOperations } from "../controller/User/Operations/fetchEngagementsForOperations/fetchEngagementsForOperations.js";
+import { fetchFollowersForOperations } from "../controller/User/Operations/fetchFollowersForOperations/fetchFollowersForOperations.js";
+import { fetchFollowingForOperations } from "../controller/User/Operations/fetchFollowingForOperations/fetchFollowingForOperations.js";
+import { joinedGames } from "../controller/Games/joinedGames/joinedGames.js";
+import { fetchGameDetails } from "../controller/Games/joinedGames/fetchGameDetails.js";
+import { fetchReports } from "../controller/Reports/fetchReports.js";
+import { deleteReport } from "../controller/Reports/deleteReport.js";
+import { SaveReport } from "../controller/Reports/SaveReport.js";
 
 const router = express.Router();
 
@@ -60,5 +74,27 @@ router.get("/fetchPostsTE", authMiddleware, fetchPostsTE);
 router.get("/fetchNotifications/User", getUserNotificationsForHandler);
 router.get("/notifications/TeamLeader", getUserNotificationsTE);
 router.post("/notifications/TeamLeader/markAsRead", markAsReadForTeamLeader);
+router.post("/notifications/User/markAsRead", markAsReadForUserController);
+
+
+
+router.get("/fetchSuspendedAccountsForOperations", authMiddleware, fetchSuspendedAccountsForOperations);
+router.get("/fetchHandlerAbsencesForOperations", authMiddleware, fetchHandlerAbsencesForOperations);
+router.get("/fetchAllActiveAccountsForOperations", authMiddleware, fetchAllActiveAccountsForOperations);
+router.get("/fetchPostsForOperations", authMiddleware, fetchPostsForOperations);
+router.get("/fetchImpressionsForOperations", authMiddleware, fetchImpressionsForOperations);
+router.get("/fetchEngagementsForOperations", authMiddleware, fetchEngagementsForOperations);
+router.get("/fetchFollowersForOperations", authMiddleware, fetchFollowersForOperations);
+router.get("/fetchFollowingForOperations", authMiddleware, fetchFollowingForOperations);
+
+
+
+router.post("/joined-games", authMiddleware, joinedGames);
+router.get("/fetchGameDetails", authMiddleware, fetchGameDetails);
+
+router.get("/fetchReports", authMiddleware, fetchReports);
+router.delete("/deleteReport", authMiddleware, deleteReport);
+router.post("/SaveReport", authMiddleware, SaveReport);
+
 
 export default router;

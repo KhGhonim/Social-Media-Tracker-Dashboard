@@ -11,20 +11,14 @@ const chartOptions = {
   },
 };
 
-export default function ProjectsInsights() {
+export default function ProjectsInsights({ Insights }) {
   const { t } = useTranslation();
 
   const locationData = {
-    labels: [
-      t("Türkiye"), // Use t directly for translations
-      t("Iran"),
-      t("Sudan"),
-      t("UAE"),
-      t("Palestine"),
-    ],
+    labels: Insights.ProjectNames,
     datasets: [
       {
-        data: [40, 20, 15, 12, 13],
+        data: Insights.Insights,
         backgroundColor: [
           "rgba(200, 16, 46)",
           "rgba(35, 159, 64)",
@@ -37,11 +31,11 @@ export default function ProjectsInsights() {
   };
 
   return (
-    <div className="bg-[--bg-color] p-6 rounded-xl shadow-sm w-full">
+    <div className="bg-[--bg-color] p-6 rounded-xl shadow-sm w-full ">
       <h3 className="text-lg text-[--text-color] font-semibold">
         {t("projectInsights")}
       </h3>
-      <div className="grid grid-cols-1 text-[--text-color]">
+      <div className="grid grid-cols-1 text-[--text-color] uppercase">
         <Doughnut data={locationData} options={chartOptions} />
       </div>
     </div>

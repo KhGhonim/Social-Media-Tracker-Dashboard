@@ -63,7 +63,7 @@ export default function SocailMediaStats() {
   return (
     <div className="w-full my-2">
       <h1 className="text-lg lg:text-2xl text-[--text-color] font-bold">
-        {t("socialMedia")}
+        {t("socialMediaEngagement")}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2  gap-6 py-6 w-full ">
         {SocailMediaStatsCards.map((card, index) => (

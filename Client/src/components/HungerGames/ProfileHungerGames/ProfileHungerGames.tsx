@@ -3,6 +3,9 @@ import { useTranslation } from "react-i18next";
 import { FaTrophy, FaUsers, FaRocket } from "react-icons/fa";
 import { GiRunningNinja } from "react-icons/gi";
 import { UserCurrentStatus } from "../../../types/types";
+import { GrGroup } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import { RiGroup2Line } from "react-icons/ri";
 
 const ProfileHungerGames = () => {
   const { t } = useTranslation();
@@ -44,16 +47,41 @@ const ProfileHungerGames = () => {
         </p>
         <div className="flex flex-col lg:flex-row justify-center gap-4">
           <div className="text-center">
-            <a
-              href="/join-competition"
+            <Link
+              to="/join-competition"
               className="inline-block text-xs md:text-base bg-[--navbar] text-white font-bold py-2 px-8 rounded-full shadow-md hover:bg-[--navbar-hover] transition duration-300"
             >
-              {t("joinNow")}
-            </a>
+              {t("betweenTeams")}
+              <span>
+                <GrGroup
+                  className={`w-6 h-6 text-white inline-block ${
+                    userCurrentStatus.user.direction === "rtl" ? "mr-2" : "ml-2"
+                  }`}
+                />
+              </span>
+            </Link>
           </div>
           <div className="text-center">
-            <a
-              href="/solo-competition"
+            <Link
+              to={`/team-competition/${
+                userCurrentStatus?.user?.projects &&
+                userCurrentStatus.user.projects[0]
+              }`}
+              className="inline-block text-xs md:text-base bg-[--navbar] text-white font-bold py-2 px-8 rounded-full shadow-md hover:bg-[--navbar-hover] transition duration-300"
+            >
+              {t("YourTeam")}
+              <span>
+                <RiGroup2Line
+                  className={`w-6 h-6 text-white inline-block ${
+                    userCurrentStatus.user.direction === "rtl" ? "mr-2" : "ml-2"
+                  }`}
+                />
+              </span>
+            </Link>
+          </div>
+          <div className="text-center">
+            <Link
+              to="/solo-competition"
               className="inline-block text-xs md:text-base bg-[--navbar] text-white font-bold py-2 px-8 rounded-full shadow-md hover:bg-[--navbar-hover] transition duration-300"
             >
               {t("wantAMonsterPrize")}
@@ -64,7 +92,7 @@ const ProfileHungerGames = () => {
                   }`}
                 />
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

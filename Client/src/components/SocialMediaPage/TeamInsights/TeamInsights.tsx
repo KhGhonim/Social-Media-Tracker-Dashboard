@@ -3,7 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useTranslation } from "react-i18next";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export default function TeamInsights({ TeamNames, Insights }) {
+export default function TeamInsights({ Insights }) {
   const { t } = useTranslation();
 
   const chartOptions = {
@@ -18,10 +18,10 @@ export default function TeamInsights({ TeamNames, Insights }) {
     },
   };
   const locationData = {
-    labels: TeamNames,
+    labels: Insights.TeamNames,
     datasets: [
       {
-        data: Insights,
+        data: Insights.Insights,
         backgroundColor: [
           "rgba(99, 102, 241, 0.8)",
           "rgba(168, 85, 247, 0.8)",

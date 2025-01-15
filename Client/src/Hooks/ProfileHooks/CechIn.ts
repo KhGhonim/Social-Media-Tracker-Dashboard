@@ -11,6 +11,7 @@ const useCheckIn = () => {
     try {
       const QuerryParams = new URLSearchParams({
         projects: JSON.stringify(userCurrentStatus.user.projects),
+        role : userCurrentStatus.user.role
       });
       const res = await fetch(`${ServerUrl}/${userCheckIn}?isCheckedIn=checkIn&${QuerryParams}`, {
         method: "POST",

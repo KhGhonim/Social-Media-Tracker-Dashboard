@@ -24,7 +24,7 @@ export const fetchHandlerAbsences = async (req, res) => {
       return res.status(404).json({ message: "Absence users not found" });
     }
 
-    res
+  return  res
       .status(200)
       .json({ message: "Absence users fetched successfully", accounts: user.rows });
   } catch (error) {

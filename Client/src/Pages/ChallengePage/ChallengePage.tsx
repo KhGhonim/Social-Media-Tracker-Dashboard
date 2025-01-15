@@ -1,7 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GameEntry, UserCurrentStatus } from "../../types/types";
-import { FaArrowLeft, FaTrophy, FaHeart, FaShare } from "react-icons/fa";
+import { UserCurrentStatus } from "../../types/types";
+import {
+  FaArrowLeft,
+  FaTrophy,
+  FaHeart,
+  FaShare,
+  FaSpinner,
+} from "react-icons/fa";
 import LeaderboardTable from "../../components/HungerGames/LeaderboardTable/LeaderboardTable";
 import Header from "../../components/Header/Header";
 import PhoneHeader from "../../components/PhoneHeader/PhoneHeader";
@@ -12,6 +18,9 @@ import { FaMessage } from "react-icons/fa6";
 import { FiTrendingUp } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "../../Hooks/ReduxHooks";
 import { SetDirection } from "../../Redux/userSlice";
+import useGames from "../../Hooks/HungerGAMES/TeamGAMES/useGames";
+import { Toaster } from "react-hot-toast";
+import useFetchGamesData from "../../Hooks/HungerGAMES/TeamGAMES/useFetchGamesData";
 
 export default function ChallengePage() {
   const { t } = useTranslation();
@@ -60,69 +69,11 @@ export default function ChallengePage() {
       icon: FiTrendingUp,
     },
   ];
-
-  const MOCK_ENTRIES = [
-    {
-      id: "1",
-      userId: "user1",
-      username: "SocialPro",
-      gameType: "likes",
-      achievementUrl:
-        "https://images.unsplash.com/photo-1611162617474-5b21e879e113",
-      score: { likes: 1500 },
-      timestamp: new Date().toISOString(),
-    },
-    {
-      id: "2",
-      userId: "user2",
-      username: "ViralKing",
-      gameType: "shares",
-      achievementUrl:
-        "https://images.unsplash.com/photo-1611162616305-c69b3037c7bb",
-      score: { shares: 2300 },
-      timestamp: new Date().toISOString(),
-    },
-    {
-      id: "3",
-      userId: "user3",
-      username: "EngagementQueen",
-      gameType: "comments",
-      achievementUrl:
-        "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb",
-      score: { comments: 850 },
-      timestamp: new Date().toISOString(),
-    },
-  ];
-
   const navigate = useNavigate();
   const game = GAME_TYPES.find((g) => g.id === gameId);
-
-  const [achievementUrl, setAchievementUrl] = useState("");
-  const [score, setScore] = useState("");
-  const [entries, setEntries] = useState<GameEntry[]>(
-    MOCK_ENTRIES.filter((entry) => entry.gameType === gameId)
-  );
-
-  if (!game) {
-    return <div>Challenge not found</div>;
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newEntry: GameEntry = {
-      id: Date.now().toString(),
-      userId: "currentUser",
-      username: "CurrentUser",
-      gameType: game.id,
-      achievementUrl,
-      score: { [game.scoreType]: Number(score) },
-      timestamp: new Date().toISOString(),
-    };
-
-    setEntries((prev) => [...prev, newEntry]);
-    setAchievementUrl("");
-    setScore("");
-  };
+  const { FormData, HandleChange, HandleSubmit, IsLoading } = useGames(gameId);
+  const { data, loading } = useFetchGamesData(IsLoading);
+  const entries = data.filter((entry) => entry.type === gameId);
 
   if (!game) {
     return <div>Challenge not found</div>;
@@ -130,6 +81,7 @@ export default function ChallengePage() {
 
   return (
     <div className="cairo-ALAPHA bg-[--bg-color]">
+      <Toaster />
       <PhoneHeader />
       <Navbar />
       <Header />
@@ -141,6 +93,7 @@ export default function ChallengePage() {
             : "lg:pl-32 lg:pr-5"
         }  w-full h-full md:min-h-screen max-sm:pb-20 `}
       >
+        {/* Retrun back button */}
         <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg py-8">
           <div className="max-w-7xl mx-auto px-4">
             <button
@@ -150,7 +103,7 @@ export default function ChallengePage() {
               <FaArrowLeft
                 className={`w-5 h-5 ${
                   userCurrentStatus.user.direction === "rtl" ? "ml-2" : "mr-2"
-                } text-[--allwhite]`}
+                } text-[--allwhite] hover:animate-pulse transition-all duration-300`}
               />
               {t("backToChallenges")}
             </button>
@@ -175,7 +128,7 @@ export default function ChallengePage() {
                 <h2 className="text-2xl font-semibold mb-6">
                   {t("submitYourAchievement")}
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={HandleSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium  mb-1">
                       {t("achievementScreenshotURL")}
@@ -183,8 +136,11 @@ export default function ChallengePage() {
                     <input
                       type="url"
                       required
-                      value={achievementUrl}
-                      onChange={(e) => setAchievementUrl(e.target.value)}
+                      name="achievementUrl"
+                      defaultValue={FormData.achievementUrl}
+                      onChange={(eo) => {
+                        HandleChange(eo);
+                      }}
                       className="w-full px-3 py-2 border rounded-lg bg-[--bg-color]  focus:ring-2 outline-none focus:ring-[--navbar]"
                       placeholder="https://x.com"
                     />
@@ -192,37 +148,64 @@ export default function ChallengePage() {
 
                   <div>
                     <label className="block text-sm capitalize  font-medium mb-1">
-                      {game.scoreType} {t("likesCount")}
+                      {t("likesCount")}
                     </label>
                     <input
                       type="number"
                       required
-                      value={score}
-                      onChange={(e) => setScore(e.target.value)}
+                      name="score"
+                      defaultValue={FormData.score}
+                      onChange={(eo) => {
+                        HandleChange(eo);
+                      }}
                       className="w-full px-3 py-2 border rounded-lg bg-[--bg-color] outline-none  focus:ring-2 focus:ring-[--navbar]"
                       placeholder={t("Enter your score")}
                     />
                   </div>
 
                   <button
+                    disabled={IsLoading}
                     type="submit"
                     className="w-full bg-[--navbar] text-[--allwhite] py-2 px-4 rounded-lg hover:bg-[--navbar-hover] transition-colors"
                   >
-                    {t("submitAchievement")}
+                    {IsLoading ? (
+                      <div className="flex w-full h-full items-center justify-center">
+                        <FaSpinner className="animate-spin" />
+                      </div>
+                    ) : (
+                      t("submitAchievement")
+                    )}
                   </button>
                 </form>
               </div>
             </div>
 
             {/* Leaderboard */}
-            <div className="lg:col-span-2">
-              <div className="bg-[--rightSide-bg-color] text-[--text-color] rounded-xl shadow-lg p-6">
-                <h2 className="text-2xl font-semibold mb-6">
-                  {t("challengeLeaderboard")}
-                </h2>
-                <LeaderboardTable entries={entries} />
+            {loading ? (
+              <div className="flex w-full h-96 items-center justify-center">
+                <FaSpinner className="animate-spin" />
               </div>
-            </div>
+            ) : entries && entries.length > 0 ? (
+              <div className="lg:col-span-2">
+                <div className="bg-[--rightSide-bg-color] text-[--text-color] rounded-xl shadow-lg p-6">
+                  <h2 className="text-2xl font-semibold mb-6">
+                    {t("challengeLeaderboard")}
+                  </h2>
+                  <LeaderboardTable entries={entries} />
+                </div>
+              </div>
+            ) : (
+              <div className="lg:col-span-2">
+                <div className="bg-[--rightSide-bg-color] text-[--text-color] rounded-xl shadow-lg p-6">
+                  <h2 className="text-2xl font-semibold mb-6">
+                    {t("challengeLeaderboard")}
+                  </h2>
+                  <p className="text-gray-600 text-center">
+                    {t("noEntriesYet")}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

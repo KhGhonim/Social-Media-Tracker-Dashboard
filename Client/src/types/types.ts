@@ -112,6 +112,8 @@ export interface AccountData {
   acc_username: string;
   acc_email: string;
   acc_mobile: string;
+  rss: string;
+  dropbox: string;
 }
 
 
@@ -147,4 +149,9 @@ export interface AITool {
   goal: string;
   isFree: boolean;
   trialPeriod: string;
+}
+
+export interface Games {
+  achievementUrl: string;
+  score: number;
 }
