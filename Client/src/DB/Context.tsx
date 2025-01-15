@@ -93,7 +93,7 @@ export const DesktopSideBar = [
     name: "AI",
     path: "/ai",
     icon: <GiArtificialHive />,
-    WhoCanSee: ["Admin", "Operation Manager"],
+    WhoCanSee: ["Admin", "Operation Manager", "Team Leader"],
   },
   {
     name: "Reports Management",
