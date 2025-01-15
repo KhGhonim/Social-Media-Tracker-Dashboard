@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PDFDocument, rgb } from 'pdf-lib';
 import toast from "react-hot-toast";
-import PalastineTemplate from '/Templates/Palestine Weekly Report.pdf'
+import ForShowTemplate from '/Templates/Palestine Weekly Report.pdf'
 import ArabicFonts from '/font/Cairo-Regular.ttf'
 import fontkit from '@pdf-lib/fontkit';
 import { cloud_name, GenerateReport, ServerUrl } from "../../Keys/envKeys";
@@ -33,7 +33,7 @@ const useReportGenerator = () => {
   };
 
   const loadTemplateAndInsertPhotos = async () => {
-    const template = GenerateReportsForm.reportType === 'PalestineWeeklyReport' ? PalastineTemplate : ''
+    const template = GenerateReportsForm.reportType === 'WeeklyReport' ? ForShowTemplate : ''
     const pdfTemplateBytes = await fetch(`${template}`).then((res) =>
       res.arrayBuffer()
     );
