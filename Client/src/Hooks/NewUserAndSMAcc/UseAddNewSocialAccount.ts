@@ -76,13 +76,14 @@ const UseAddNewSocialAccount = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        toast.error("Failed to create account");
+        toast.error(data.message);
         setisLoading(false);
         return;
       }
 
-      const data = await response.json();
 
       toast.success(data.message);
 
