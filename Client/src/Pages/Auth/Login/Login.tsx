@@ -41,6 +41,9 @@ export default function Login() {
                   required
                 />
               </div>
+              <span className="text-sm text-gray-400">
+                Admin: admin@admin.com
+              </span>
             </div>
 
             <div>
@@ -71,6 +74,7 @@ export default function Login() {
                   )}
                 </button>
               </div>
+              <span className="text-sm text-gray-400">PW: Admin123@</span>
             </div>
 
             <button

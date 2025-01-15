@@ -30,11 +30,12 @@
         }
       },
       "previewLimit": 50,
-      "server": "dpg-ctp95l5ds78s73d0ajmg-a.oregon-postgres.render.com",
+      "server": "dpg-cu40hv23esus73c2tb8g-a.oregon-postgres.render.com",
       "port": 5432,
+      "askForPassword": true,
       "driver": "PostgreSQL",
       "name": "My SMD",
-      "database": "smd",
+      "database": "smd_fzob",
       "username": "admin"
     }
   ]
