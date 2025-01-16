@@ -18,25 +18,35 @@ export default function PhotoSelector({
     setSelectedPhotos((prev) => prev.filter((p) => p.id !== photo.id));
   };
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const startDateSQL = format(startDate, "yyyy-MM-dd");
-  const endDateSQL = format(endDate, "yyyy-MM-dd");
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
   };
+  const startDateSQL = startDate ? format(startDate, "yyyy-MM-dd") : null;
+  const endDateSQL = endDate ? format(endDate, "yyyy-MM-dd") : null;
 
   const filteredData = FetchPostsTEData.filter((item) => {
     const createdAt = format(item.created_at, "yyyy-MM-dd");
-    return (
-      (createdAt >= startDateSQL && createdAt <= endDateSQL) ||
-      createdAt === startDateSQL ||
-      createdAt === endDateSQL
-    );
-  });
 
+    if (!startDateSQL && !endDateSQL) {
+      return true;
+    }
+
+    if (startDateSQL && !endDateSQL) {
+      return createdAt >= startDateSQL;
+    }
+
+    if (!startDateSQL && endDateSQL) {
+      return createdAt <= endDateSQL;
+    }
+
+    if (startDateSQL && endDateSQL) {
+      return createdAt >= startDateSQL && createdAt <= endDateSQL;
+    }
+  });
   const { t } = useTranslation();
 
   return (

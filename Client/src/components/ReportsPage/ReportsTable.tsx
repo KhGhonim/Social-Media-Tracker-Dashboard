@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export default function ReportsTable({ data }) {
   const { userCurrentStatus }: { userCurrentStatus: UserCurrentStatus } =
     useAppSelector((state) => state.user);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const { HandleDeleteReport, Isloading } = useDeleteReport();
 
@@ -22,16 +22,27 @@ export default function ReportsTable({ data }) {
     setStartDate(start);
     setEndDate(end);
   };
-  const startDateSQL = format(startDate, "yyyy-MM-dd");
-  const endDateSQL = format(endDate, "yyyy-MM-dd");
+  const startDateSQL = startDate ? format(startDate, "yyyy-MM-dd") : null;
+  const endDateSQL = endDate ? format(endDate, "yyyy-MM-dd") : null;
 
   const filteredData = data.filter((item) => {
     const createdAt = format(item.created_at, "yyyy-MM-dd");
-    return (
-      (createdAt >= startDateSQL && createdAt <= endDateSQL) ||
-      createdAt === startDateSQL ||
-      createdAt === endDateSQL
-    );
+
+    if (!startDateSQL && !endDateSQL) {
+      return true;
+    }
+
+    if (startDateSQL && !endDateSQL) {
+      return createdAt >= startDateSQL;
+    }
+
+    if (!startDateSQL && endDateSQL) {
+      return createdAt <= endDateSQL;
+    }
+
+    if (startDateSQL && endDateSQL) {
+      return createdAt >= startDateSQL && createdAt <= endDateSQL;
+    }
   });
   const { t } = useTranslation();
 
